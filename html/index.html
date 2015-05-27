@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="bootstrap-3.3.4-dist/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="bootstrap-3.3.4-dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/custom.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script type="text/javascript" src="bootstrap-3.3.4-dist/js/jquery.js"></script>
+<script src="bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+    <script src="js/jquery-latest.js"></script>
+    <script>
+
+    // This is the first thing we add ------------------------------------------
+    $(document).ready(function() {
+        
+        $('.rate_widget').each(function(i) {
+            var widget = this;
+            var out_data = {
+                widget_id : $(widget).attr('id'),
+                fetch: 1
+            };
+            $.post(
+                'ratings.php',
+                out_data,
+                function(INFO) {
+                    $(widget).data( 'fsr', INFO );
+                    set_votes(widget);
+                },
+                'json'
+            );
+        });
+    
+
+        $('.ratings_stars').hover(
+            // Handles the mouseover
+            function() {
+                $(this).prevAll().andSelf().addClass('ratings_over');
+                $(this).nextAll().removeClass('ratings_vote'); 
+            },
+            // Handles the mouseout
+            function() {
+                $(this).prevAll().andSelf().removeClass('ratings_over');
+                // can't use 'this' because it wont contain the updated data
+                set_votes($(this).parent());
+            }
+        );
+        
+        
+        // This actually records the vote
+        $('.ratings_stars').bind('click', function() {
+            var star = this;
+            var widget = $(this).parent();
+            
+            var clicked_data = {
+                clicked_on : $(star).attr('class'),
+                widget_id : $(star).parent().attr('id')
+            };
+            $.post(
+                'ratings.php',
+                clicked_data,
+                function(INFO) {
+                    widget.data( 'fsr', INFO );
+                    set_votes(widget);
+                },
+                'json'
+            ); 
+        });
+        
+        
+        
+    });
+
+    function set_votes(widget) {
+
+        var avg = $(widget).data('fsr').whole_avg;
+        var votes = $(widget).data('fsr').number_votes;
+        var exact = $(widget).data('fsr').dec_avg;
+    
+        window.console && console.log('and now in set_votes, it thinks the fsr is ' + $(widget).data('fsr').number_votes);
+        
+        $(widget).find('.star_' + avg).prevAll().andSelf().addClass('ratings_vote');
+        $(widget).find('.star_' + avg).nextAll().removeClass('ratings_vote'); 
+        $(widget).find('.total_votes').text( votes + ' votes recorded (' + exact + ' rating)' );
+    }
+    // END FIRST THING
+   
+    </script>
+
+</head>
+<body>
+	<header id="header" class="container-fluid">
+		<nav class="navbar navbar-default navbar-static-top row">
+		<div class = "container">
+			<ul class="nav navbar-nav col-xs-12 col-md-9">
+		    	<li>
+		    		<a href="#">My Account</a>
+		    		<ul class="dropdown-menu">
+						<li> <a href="#">Lost Password</a> </li>
+						<li><a href="#">View Order</a></li>
+						<li><a href="#">Edit My Address</a></li>
+					</ul>
+		    	</li>		    	
+		    	<li>
+		    		<a href="">Stone</a>
+		    		<ul class="dropdown-menu">
+						<li><a href="http://demo2.woothemes.com/mystile/templates/timeline/">Timeline</a></li>
+						<li><a href="http://demo2.woothemes.com/mystile/templates/tags/">Tags</a></li>
+						<li><a href="http://demo2.woothemes.com/mystile/templates/blog/">Blog</a></li>
+						<li><a href="http://demo2.woothemes.com/mystile/templates/image-gallery/">Image Gallery</a></li>
+						<li><a href="http://demo2.woothemes.com/mystile/templates/contact-form/">Contact Form</a></li>
+						<li><a href="http://demo2.woothemes.com/mystile/templates/full-width/">Full Width</a></li>
+						<li><a href="http://demo2.woothemes.com/mystile/templates/archives/">Archives</a></li>
+						<li><a href="http://demo2.woothemes.com/mystile/templates/sitemap/">Sitemap</a></li>
+					</ul>
+		    	</li>
+		    </ul>
+		    <ul class="nav navbar-nav col-xs-6 col-md-3">
+				<li class="search">
+					<form role="search" method="get" class="searchform" action="http://demo2.woothemes.com/mystile/">
+						 <div class="input-group">
+					      <input type="text" class="form-control" placeholder="Search for..." size="20">
+					      <span class="input-group-btn">
+					        <button class="btn btn-default" type="button">Go!</button>
+					      </span>
+					    </div><!-- /input-group -->
+					</form>
+				</li>
+			</ul>
+		</div>
+ 
+		</nav> 
+	</header><!-- /header -->
+	<div class="container">
+	  <div class="row line-space">
+	      <div class="col-xs-12 col-md-7">
+		      <hgroup>
+				<h1 class="site-title">
+					<a href="http://demo2.woothemes.com/mystile/">Stone</a>
+				</h1>
+				<h2 class="site-description">Welcome to store</h2>
+				</hgroup>
+			</div>
+  		<div class="col-xs-6 col-md-5">
+  			<nav class="navbar row right-menu">
+				<ul class="nav navbar-nav">
+					<li><a href="http://demo2.woothemes.com/mystile/">Home</a></li>
+					<li><a href="http://demo2.woothemes.com/mystile/shop/" class="glyphicon glyphicon-menu-down">Shop</a>
+						<ul class="dropdown-menu">
+							<li><a href="http://demo2.woothemes.com/mystile/product-category/tshirts/">T-Shirts</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/product-category/outerwear/">Outerwear</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/product-category/shoes/">Shoes</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/product-category/hats/">Hats</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/product-category/accessories/">Accessories</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/product-category/bags/">Bags</a></li>
+						</ul>
+					</li>
+					<li><a href="http://demo2.woothemes.com/mystile/templates/blog/">Blog</a></li>
+					<li><a href="http://demo2.woothemes.com/mystile/sample-page/">Sample Page</a></li>
+					<li><a href="http://demo2.woothemes.com/mystile/templates/" class="glyphicon glyphicon-menu-down">Templates</a>
+						<ul class="dropdown-menu">
+							<li><a href="http://demo2.woothemes.com/mystile/templates/archives/">Archives</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/templates/contact-form/">Contact Form</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/templates/full-width/">Full Width</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/templates/image-gallery/">Image Gallery</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/templates/sitemap/">Sitemap</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/templates/tags/">Tags</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/templates/timeline/">Timeline</a></li>
+						</ul></li>
+				</ul>
+			</nav>
+  		</div>
+	  </div>
+	  <div class="row hidden-sm banner ">
+	  	<img src="img/banner.jpg" alt="">
+		
+		<div class="description">
+			<h1>
+				<span>Welcome to our store</span>
+			</h1>
+			<p>
+				Stone shop!
+			</p>
+		</div>
+	  </div><!--Banner-->
+	<div class="line-space">&nbsp;</div>
+<!--Content-->
+	<div class="row it_content">
+		<div class="col-xs-12 col-md-3 item">
+		    <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images.jpg" class=" " alt="castillo" />
+				<h3>Stone 1</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images1.jpg" class=" " alt="castillo" />
+				<h3>Stone 2</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images2.jpg" class=" " alt="castillo" />
+				<h3>Stone 3</h3>
+				 <span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images3.jpg" class=" " alt="castillo" />
+				<h3>Stone 4</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+
+		<div class="col-xs-12 col-md-3 item">
+		    <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images4.jpg" class=" " alt="castillo" />
+				<h3>Stone 5</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images5.jpg" class=" " alt="castillo" />
+				<h3>Stone 6</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images6.jpg" class=" " alt="castillo" />
+				<h3>Stone 7</h3>
+				 <span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images7.jpg" class=" " alt="castillo" />
+				<h3>Stone 8</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		    <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images8.jpg" class=" " alt="castillo" />
+				<h3>Stone 9</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images9.jpg" class=" " alt="castillo" />
+				<h3>Stone 10</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images2.jpg" class=" " alt="castillo" />
+				<h3>Stone 11</h3>
+				 <span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images3.jpg" class=" " alt="castillo" />
+				<h3>Stone 12</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		    <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images.jpg" class=" " alt="castillo" />
+				<h3>Stone 13</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images1.jpg" class=" " alt="castillo" />
+				<h3>Stone 14</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images2.jpg" class=" " alt="castillo" />
+				<h3>Stone 15</h3>
+				 <span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<div class="col-xs-12 col-md-3 item">
+		     <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
+				<img src="img/images3.jpg" class=" " alt="castillo" />
+				<h3>Stone 16</h3>
+				<span class="price"><span class="amount">$55.00</span></span>
+			</a>
+			<div id="r1" class="rate_widget">
+		        <div class="star_1 ratings_stars"></div>
+		        <div class="star_2 ratings_stars"></div>
+		        <div class="star_3 ratings_stars"></div>
+		        <div class="star_4 ratings_stars"></div>
+		        <div class="star_5 ratings_stars"></div>
+		    </div>
+		</div>
+		<nav>
+  <ul class="pagination">
+    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+  </ul>
+</nav>
+	</div>
+	</div>
+	<div class="line"></div>
+	<footer class="container-fluid">
+	<a href="#"><img src="img/logo.jpg" alt="SHOP STONE" title="SHOP STONE"/></a>
+	<ul>
+		<li><a href="index.html">Home</a></li>
+		<li><a href="#">Start shopping</a></li>
+		<li class="last"><a href="#">About us</a></li>
+	</ul>
+	</footer>
+</body>
+</html>
