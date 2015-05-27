@@ -1,0 +1,49 @@
+.manage-menu{
+    padding:10px;
+}
+.font-link{
+    font-weight: bold !important;
+}
+.info-user th{
+    width:200px;
+}
+.info-user-td td{
+    width:200px;
+} 
+.user-add th{
+    width:200px;
+}
+.link-menu:hover{
+    color:#fff;
+    /*border-radius: 50%;*/
+    transition:0.5s;
+    -webkit-transition:0.5s;
+    -moz-transition:0.5s;
+    background: rgba(92, 184, 92, 0.39);
+}
+.link-menu{
+    margin-right: 8px;
+    padding: 102px;
+    font-size: 40px;
+    font-weight: bold;
+    color:#fff;
+    background: #5cb85c;
+    transition:0.5s;
+    -webkit-transition:0.5s;
+    -moz-transition:0.5s;
+}
+.att{
+    margin-top: 58px;
+}
+.image-shop img{
+    width:300px;
+}
+.image-menu img{
+    width: 200px;
+}
+.image-edit img{
+    width:350px;
+}
+body > .header .navbar .sidebar-toggle{
+    background: #fff;
+}

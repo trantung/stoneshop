@@ -10,8 +10,28 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::group(array('prefix' => 'admin'), function () {
 
-Route::get('/', function()
-{
-	return View::make('hello');
+    Route::get('/', function()
+    {
+        return View::make('admin.dashboard');
+    });
+
+    Route::get('/category', function()
+    {
+        return View::make('admin.category');
+    });
+    Route::get('/category/sub', function()
+    {
+    	return View::make('admin.subcategory');
+    });
+
+
+    Route::get('/{id}/change_password', array('as'=>'get.changepassword', 'uses'=>'AdminController@getChangePassword'));
+
+    Route::get('/logout', array('as'=>'get.logout', 'uses'=>'AdminController@getLogout'));
+
+    Route::get('/', array('as'=>'index', 'uses'=>'AdminController@getIndex'));
+
+
 });
