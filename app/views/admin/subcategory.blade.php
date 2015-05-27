@@ -1,4 +1,4 @@
-@extends('layouts.header')
+@extends('layouts.admin.header')
 
 @section('content')
 <div class="manage-menu">
