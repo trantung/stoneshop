@@ -110,6 +110,5 @@ Route::group(array('prefix' => 'admin'), function () {
     Route::get('/change_password', array('as'=>'get.changepassword', 'uses'=>'AdminController@getChangePassword'));
     //logout
     Route::get('/logout', array('as'=>'get.logout', 'uses'=>'AdminController@getLogout'));
-
     
 });
