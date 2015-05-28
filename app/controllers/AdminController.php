@@ -40,4 +40,25 @@ class AdminController extends BaseController {
         return View::make('admin.category');
     }
 
+    public function getCategoryEdit($cat_id){
+
+        return View::make('admin.category_edit')->with(compact('cat_id'));
+    }
+
+    public function postCategoryEdit($cat_id){
+        dd($cat_id);
+    }
+
+    public function getCategoryCreate(){
+        return View::make('admin.category_create');
+    }
+
+    public function postCategoryDelete($cat_id){
+        dd("deleted");
+    }
+
+    public function getSubCatList(){
+        return View::make("admin.category_sub");
+    }
+
 }

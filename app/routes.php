@@ -49,7 +49,7 @@ Route::group(array('prefix' => 'admin'), function () {
     Manage Sub-Category
      */
     //overview list sub-category follow category_id
-    Route::get('/category/{cat_id}', array('as'=>'subcat.get.list','uses'=>'AdminController@getSubCatList'));
+    Route::get('/category/listSub', array('as'=>'subcat.get.list','uses'=>'AdminController@getSubCatList'));
 
     //create new sub-category follow category_id
     Route::get('/category/{cat_id}/add/sub', array('as'=>'subcat.get.add','uses'=>'AdminController@getSubCatAdd'));

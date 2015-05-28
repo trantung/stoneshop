@@ -14,7 +14,7 @@
     </tr>
     <tr>
         <td>demo</td>
-        <td>null</td>
+        <td>parrent name</td>
         <td>des demo</td>
         <td>
             <div style=" display: table" >
@@ -36,7 +36,7 @@
         </tr>
         <tr>
         <td>demo1</td>
-        <td>demo</td>
+        <td>parrent name</td>
         <td>des demo1</td>
         <td>
             <div style=" display: table" >

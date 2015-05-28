@@ -82,6 +82,7 @@
                     <ul class="sidebar-menu">
                         <li>{{ link_to_route('index', $title = 'Dashboard') }}</li>
                         <li>{{ link_to_route('category.index', $title = 'Manage Category') }}</li>
+                        {{-- <li>{{ link_to_route('category.index', $title = 'Manage Sub-Category') }}</li> --}}
                         <li>{{ link_to_route('product.index', $title = 'Manage Product') }}</li>
                         <li>{{ link_to_route('shop.index', $title = 'Manage Shop') }}</li>
                         <li>{{ link_to_route('image.index', $title = 'Manage Image Header') }}</li>
