@@ -21,7 +21,7 @@ Route::group(array('prefix' => 'admin'), function () {
     Login: login for admin
      */
     Route::get('/login', array('as'=>'get.admin','uses'=>'AdminController@getLogin'));
-    Route::post('/login', array('as'=>'get.admin','uses'=>'AdminController@postLogin'));
+    Route::post('/login', array('as'=>'post.admin','uses'=>'AdminController@postLogin'));
 
     /*
     Dashboard: index for admin

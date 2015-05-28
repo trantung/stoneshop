@@ -35,5 +35,9 @@ class AdminController extends BaseController {
         return View::make('admin.dashboard');
     }
 
+    public function getCategory(){
+
+        return View::make('admin.category');
+    }
 
 }
