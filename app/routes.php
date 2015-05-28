@@ -26,10 +26,6 @@ Route::group(array('prefix' => 'admin'), function () {
     Manage Category
      */
     //overview category
-    Route::get('/category', function()
-    {
-        return View::make('admin.category');
-    });
     Route::get('/category', array('as'=>'category.index','uses'=>'AdminController@getCategory'));
 
     //create new Category
