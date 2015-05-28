@@ -20,7 +20,7 @@ class AdminController extends BaseController {
         return View::make('hello');
     }
 
-    public function getChangePassword($user_id)
+    public function getChangePassword()
     {
         return 'change pass';
     }
