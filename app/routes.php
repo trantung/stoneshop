@@ -20,13 +20,13 @@ Route::group(array('prefix' => 'admin'), function () {
     /*
     Login: login for admin
      */
-    Route::get('/login', array('as'=>'get.admin','uses'=>'AdminController@getLogin'));
-    Route::post('/login', array('as'=>'post.admin','uses'=>'AdminController@postLogin'));
+    Route::get('/login', array('as'=>'get.admin.login','uses'=>'AdminController@getLogin'));
+    Route::post('/login', array('as'=>'post.admin.login','uses'=>'AdminController@postLogin'));
 
     /*
     Dashboard: index for admin
      */
-    Route::get('/', array('as'=>'index', 'uses'=>'AdminController@getIndex'));
+    Route::get('/', array('as'=>'get.admin.index', 'uses'=>'AdminController@getIndex'));
 
     /*
     Manage Category
