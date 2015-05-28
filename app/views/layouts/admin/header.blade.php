@@ -38,7 +38,7 @@
     <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
-            <a class="logo" href="#"> FoodPress </a>
+            <a class="logo" href="#"> StoneShop </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
@@ -60,13 +60,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </li>change password
-                                {{-- <li>
-                                    {{ link_to_route('get.changepassword', $title = 'Change Password', Auth::user()->id, ['class'=>"btn btn-default btn-flat"] ) }}
-                                </li> --}}
+                                    <a href="#" class="btn btn-default btn-flat">{{$title = 'Profile'}}</a>
                                 <li>
-                                    <a href="{{ route('get.logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ route('get.changepassword') }}" class="btn btn-default btn-flat">{{$title = 'Change Password'}}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('get.logout') }}" class="btn btn-default btn-flat">{{$title = 'Logout'}}</a>
                                 </li>
                             </ul>
                         </li>
@@ -82,11 +81,10 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li>{{ link_to_route('index', $title = 'Dashboard') }}</li>
-                        <li>{{ link_to_route('index', $title = 'Manage Category') }}</li>
-                        <li>{{ link_to_route('index', $title = 'Manage Product') }}</li>
-                        <li>{{ link_to_route('index', $title = 'Manange Visiters') }}</li>
-                        <li>{{ link_to_route('index', $title = 'Manage Shop') }}</li>
-                        <li>{{ link_to_route('index', $title = 'Manage Image Header') }}</li>
+                        <li>{{ link_to_route('category.index', $title = 'Manage Category') }}</li>
+                        <li>{{ link_to_route('product.index', $title = 'Manage Product') }}</li>
+                        <li>{{ link_to_route('shop.index', $title = 'Manage Shop') }}</li>
+                        <li>{{ link_to_route('image.index', $title = 'Manage Image Header') }}</li>
                     </ul>
                 </section>
                         <!-- /.sidebar -->
