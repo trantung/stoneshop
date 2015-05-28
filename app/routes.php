@@ -10,6 +10,12 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::get("/", function(){
+    return View::make("frontend.index");
+});
+Route::get("/detail", function(){
+    return View::make("frontend.detail");
+});
 Route::group(array('prefix' => 'admin'), function () {
 
     Route::get('/', function()
