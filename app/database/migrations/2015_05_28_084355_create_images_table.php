@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVisitersTable extends Migration {
+class CreateImagesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,13 @@ class CreateVisitersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('visiters', function(Blueprint $table) {
+		Schema::create('images', function(Blueprint $table) {
 			$table->increments('id');
-			$table->integer('visited_quantity');
-			$table->text('description');
+			$table->integer('type')->nullable();
+			$table->string('description',256);
+			$table->string('image_url',256);
 			$table->timestamps();
-		});
+		});	
 	}
 
 	/**
@@ -27,7 +28,7 @@ class CreateVisitersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('visiters');
+		Schema::drop('images');
 	}
 
 }

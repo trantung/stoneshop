@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration {
 			      ->references('id')->on('categories')
 			      ->onDelete('cascade');
 			$table->string('name',128);
+			$table->double('price');
 			$table->string('image_url',256);
 			$table->string('description',256);
 			$table->integer('total_rate');
