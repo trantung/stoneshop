@@ -16,7 +16,7 @@ class AdminController extends BaseController {
     */
     public function __construct()
     {
-        $this->beforeFilter('admin', array('except'=>array('getLogin','postLogin')));
+        // $this->beforeFilter('admin', array('except'=>array('getLogin','postLogin')));
     }
 
     public function showWelcome()
@@ -80,6 +80,10 @@ class AdminController extends BaseController {
 
     public function getSubCatList(){
         return View::make("admin.category_sub");
+    }
+
+    public function getProduct(){
+        return View::make("admin.product");
     }
 
 }

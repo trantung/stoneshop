@@ -51,3 +51,14 @@ body > .header .navbar .sidebar-toggle{
 .form-thai{
     margin-right: 10%;
 }
+
+.compress{
+  width:10% !important;
+/*aspect ratio will be maintained*/
+
+}
+
+.image{
+    display:none;
+    position:absolute;
+ }
