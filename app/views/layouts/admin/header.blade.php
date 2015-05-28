@@ -47,7 +47,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="show-menu">Menu</span>
                 </a>
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
@@ -80,7 +79,7 @@
                 <section class="sidebar">
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li>{{ link_to_route('index', $title = 'Dashboard') }}</li>
+                        <li>{{ link_to_route('get.admin.index', $title = 'Dashboard') }}</li>
                         <li>{{ link_to_route('category.index', $title = 'Manage Category') }}</li>
                         <li>{{ link_to_route('product.index', $title = 'Manage Product') }}</li>
                         <li>{{ link_to_route('shop.index', $title = 'Manage Shop') }}</li>
