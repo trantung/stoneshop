@@ -1,7 +1,11 @@
 <?php
 
 class AdminController extends BaseController {
-
+    protected $category;
+    protected $post;
+    protected $snsaccount;
+    protected $attachment;
+    protected $member;
     /*
     |--------------------------------------------------------------------------
     | Default Home Controller
@@ -14,9 +18,10 @@ class AdminController extends BaseController {
     |   Route::get('/', 'HomeController@showWelcome');
     |
     */
-    public function __construct()
+    public function __construct(\Category $category)
     {
         // $this->beforeFilter('admin', array('except'=>array('getLogin','postLogin')));
+        $this->category     = $category;
     }
 
     public function showWelcome()
@@ -57,25 +62,44 @@ class AdminController extends BaseController {
     }
 
     public function getCategory(){
-
-        return View::make('admin.category');
+        $categorys = $this->category->all();
+        return View::make('admin.category')->with('categorys',$categorys);
     }
 
     public function getCategoryEdit($cat_id){
-
-        return View::make('admin.category_edit')->with(compact('cat_id'));
+        $category = $this->category->findOrFail($cat_id);
+        return View::make('admin.category_edit')->with('category', $category);
     }
 
     public function postCategoryEdit($cat_id){
-        dd($cat_id);
+        $data = Input::except("_token");
+        $category = $this->category->findOrFail($cat_id);
+
+        $category->name         = $data['name'];
+        $category->description  = $data['description'];
+
+        $category->push();
+
+        return Redirect::back()->with('message',' Lưu Thành Công !');
+
     }
 
     public function getCategoryCreate(){
         return View::make('admin.category_create');
     }
 
+
+    public function postCategoryCreate(){
+        $data   = Input::except("_token");
+        $data["shop_id"] = 1;
+        $category = $this->category;
+        $category->firstOrCreate($data);
+         return Redirect::back()->with('message',' Đã Thêm Thành Công !');
+    }
+
     public function postCategoryDelete($cat_id){
-        dd("deleted");
+        $this->category->destroy($cat_id);
+        return Redirect::back();
     }
 
     public function getSubCatList(){

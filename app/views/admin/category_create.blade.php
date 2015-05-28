@@ -12,18 +12,18 @@
 	     <div class="form-group">
 	        {{Form::label('lblName',"Description", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-	        {{Form::textarea('name',"", array('class'=>'form-control',"rows"=>6))}}
+	        {{Form::textarea('description',"", array('class'=>'form-control',"rows"=>6))}}
 	        </div>
 	    </div>
 	    <div class="form-group">
 	    	{{Form::label('lblParent',"Select Parent: ", array("class"=>"col-sm-2 control-label"))}}
 	    	<div class="col-sm-10">
-	    		<select class="form-control">
-	    			<option selected="true">....</option>
-	        		<option>Tung</option>
-	        		<option>Thai</option>
-	        		<option>Thai</option>
-	        		<option>Tung</option>
+	    		<select name="parent_id" class="form-control">
+	    			<option value="0" selected="true">....</option>
+	        		<option value="1">Tung</option>
+	        		<option value="2">Thai</option>
+	        		<option value="3">Thai</option>
+	        		<option value="4">Tung</option>
 	      		</select>
 	    	</div>
 	    </div>

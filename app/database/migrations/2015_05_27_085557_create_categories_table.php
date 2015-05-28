@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration {
 			$table->integer('parent_id');
 			$table->string('name',128);
 			$table->string('description',256);
+			$table->softDeletes(); // <-- This will add a deleted_at field
 			$table->timestamps();
 		});
 	}
