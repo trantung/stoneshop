@@ -2,10 +2,7 @@
 
 class AdminController extends BaseController {
     protected $category;
-    protected $post;
-    protected $snsaccount;
-    protected $attachment;
-    protected $member;
+    protected $product;
     /*
     |--------------------------------------------------------------------------
     | Default Home Controller
@@ -18,10 +15,11 @@ class AdminController extends BaseController {
     |   Route::get('/', 'HomeController@showWelcome');
     |
     */
-    public function __construct(\Category $category)
+    public function __construct(\Category $category, \Product $product)
     {
         // $this->beforeFilter('admin', array('except'=>array('getLogin','postLogin')));
         $this->category     = $category;
+        $this->product     = $product;
     }
 
     public function showWelcome()
@@ -99,7 +97,7 @@ class AdminController extends BaseController {
 
     public function postCategoryDelete($cat_id){
         $this->category->destroy($cat_id);
-        return Redirect::back();
+        return Redirect::back()->with('message', 'Xoá Thành Công!');
     }
 
     public function getSubCatList(){
@@ -107,7 +105,72 @@ class AdminController extends BaseController {
     }
 
     public function getProduct(){
-        return View::make("admin.product");
+        $products = $this->product->paginate(10);
+        $categories = $this->category->all();
+
+        return View::make("admin.product")->with('products',$products)
+                                          ->with('categories',$categories);
     }
 
+    public function getProductCreate(){
+        return View::make("admin.product_create");
+    }
+
+    public function postProductCreate(){
+        $data = Input::except('_token');
+        $destinationPath = public_path().'/img/';
+        $filename = 'nothumnail';
+        if(!is_null($data['image'] )){
+            $file = $data['image'];
+            $time = date("Y-m-d H:i:s");
+            $filename        =  $time . '_' . $file->getClientOriginalName();
+            $uploadSuccess   =  $file->move($destinationPath, $filename);
+            
+        }
+        $product = Product::create([
+                        'name'          => $data['name'],
+                        'price'         => $data['price'],
+                        'description'   => $data['description'],
+                        'category_id'   => $data['category'],
+                        'image_url'     => $filename]);
+
+        if ($product) {
+            return Redirect::route('product.get.edit', $product->id)->with('message', 'Thêm Thành Công!');
+        }
+    }    
+
+    public function getProductEdit($product_id) {
+       $product = $this->product->findOrFail($product_id);
+       $categories = $this->category->all();
+        return View::make('admin.product_edit')->with('product', $product)
+                                                ->with('categories', $categories);
+    }
+
+    public function postProductEdit($product_id){
+        $product = $this->product->findOrFail($product_id);
+        $data = Input::except('_token');
+        $destinationPath = public_path().'/img/';
+
+        $product->name = $data['name'];
+        $product->description = $data['description'];
+        $product->price = $data['price'];
+        $product->category_id = $data['category'];
+        if(!is_null($data['image'] )){
+            $file = $data['image'];
+            $time = date("Y-m-d H:i:s");
+            $filename        =  $time . '_' . $file->getClientOriginalName();
+            $uploadSuccess   =  $file->move($destinationPath, $filename);
+            $product->image_url = $filename;
+            
+        }
+        $product->push();
+        if ($product) {
+            return Redirect::route('product.get.edit', $product->id)->with('message', 'Sửa Thành Công!');
+        }
+    }
+
+    public function postProductDelete($product_id){
+        $this->product->destroy($product_id);
+        return Redirect::back()->with('message', 'Xoá Thành Công!');
+    }
 }
