@@ -3,6 +3,8 @@
 class AdminController extends BaseController {
     protected $category;
     protected $product;
+    protected $shop;
+    protected $user;
     /*
     |--------------------------------------------------------------------------
     | Default Home Controller
@@ -15,11 +17,13 @@ class AdminController extends BaseController {
     |   Route::get('/', 'HomeController@showWelcome');
     |
     */
-    public function __construct(\Category $category, \Product $product)
+    public function __construct(\Category $category, \Product $product, \Shop $shop,User $user)
     {
         // $this->beforeFilter('admin', array('except'=>array('getLogin','postLogin')));
         $this->category     = $category;
-        $this->product     = $product;
+        $this->product      = $product;
+        $this->shop         = $shop;
+        $this->user         = $user;
     }
 
     public function showWelcome()
@@ -170,5 +174,25 @@ class AdminController extends BaseController {
     public function postProductDelete($product_id){
         $this->product->destroy($product_id);
         return Redirect::back()->with('message', 'Xoá Thành Công!');
+    }
+
+    public function getShop(){
+        $shops = $this->shop->all();
+        return View::make('admin.shop')->with('shops', $shops);
+    }
+
+    public function getShopCreate(){
+        $users = $this->user->all();
+        return View::make('admin.shop_create')->with('users', $users);
+    }
+
+    public function postShopCreate(){
+
+        // return Redirect::back()->with('message',' Đã Thêm Thành Công !');
+    }
+
+    public function postShopDelete($shop_id){
+        // $this->shop->destroy($shop_id);
+        // return Redirect::back()->with('message', 'Xoá Thành Công!');
     }
 }

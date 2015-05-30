@@ -82,6 +82,10 @@ Route::group(array('prefix' => 'admin'), function () {
      */
     //overview shop
     Route::get('/shop', array('as'=>'shop.index','uses'=>'AdminController@getShop'));
+    Route::get('/shop/create', array('as'=>'shop.get.create','uses'=>'AdminController@getShopCreate'));
+    Route::post('/shop/create', array('as'=>'shop.post.create','uses'=>'AdminController@postShopCreate'));
+
+    Route::post('/shop/{shop_id}/delete', array('as'=>'shop.delete','uses'=>'AdminController@postShopDelete'));
 
     //edit shop(title, description, address, tel, image, lat and long for google map)
     Route::get('/shop/{shop_id}/edit', array('as'=>'shop.get.edit','uses'=>'AdminController@getShopEdit'));

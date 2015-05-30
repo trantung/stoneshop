@@ -23,11 +23,10 @@
 	        <th>NAME</th>
 	        <th>PRICE</th>
 	        <th>CATEGORY</th>
-	        <th>IMAGE</th>
 	        <th>DESCRIPTION</th>
 	        <th>RATE</th>
+	        <th>IMAGE</th>
 	        <th>ACTION</th>
-
 	    </tr>
 	    @foreach($products as $product)
 	    	<?php 
@@ -40,12 +39,13 @@
 	        <td>{{$product->name}}</td>
 	        <td>{{$product->price}}</td>
 	        <td>{{Category::find($product->category_id)->name}}</td>
+
+	        <td>{{$product->description}}</td>
+	        <td>{{$product->average_rate . '/5'}}</td>
 	        <td>
 	        	<img src="{{asset('img').'/'.$image}}" class="img-rounded compress" alt="Rounded Image" />
 	        	{{-- <img src="{{asset('img/images1.jpg')}}" class="img-roundedd image" alt="Rounded Image" /> --}}
 	        </td>
-	        <td>{{$product->description}}</td>
-	        <td>{{$product->average_rate . '/5'}}</td>
 	        <td>
 	            <div style=" display: table" >
 	            <div style = "display: table-cell;  vertical-align: top;">
@@ -58,7 +58,6 @@
 	                        </div>
 	                    </div>
 	                {{Form::close()}}
-
 	            </div>
 	        </td>
 	      </tr>
@@ -71,7 +70,6 @@
 <script type="text/javascript">
 	$(".compress").hover(function(){
   	$(".image").show();
-
 },
 function(){
    $(".image").hide()
