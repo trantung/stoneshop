@@ -45,6 +45,28 @@
 	    </div>
 	{{Form::close()}}
 </div>
+
+
+<div class="form-group">
+{{ Form::label('latitude', 'Latitude:', array('class'=>'col-md-2 control-label')) }}
+<div class="col-sm-3">
+    {{ Form::text('latitude',null, array('class'=>'form-control','id'=>'latitude')) }}
+</div>
+</div>
+<div class="form-group">
+    {{ Form::label('longitude', 'Longitude:', array('class'=>'col-md-2 control-label')) }}
+    <div class="col-sm-3">
+        {{ Form::text('longitude',null, array('class'=>'form-control','id'=>'longitude')) }}
+    </div>
+</div>
+ <div class="col-sm-8">
+<div id="mapview" style="width:500px;height:500px"></div>
+                    </div>
+<script type="text/javascript" src="{{ url('js/gmap.js') }}"></script>
+
+
+
+
 	<script type="text/javascript">
 		    function readURL(input) {
 		        if (input.files && input.files[0]) {

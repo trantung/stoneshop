@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="{{ url('css/jquery.timepicker.css') }}">
 
      <script type="text/javascript" src="{{ url('js/jquery.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places" style=""></script>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
