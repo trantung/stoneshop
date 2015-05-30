@@ -14,4 +14,8 @@ class Category extends Eloquent {
     {
         return $this->belongsTo('Shop', 'shop_id');
     }
+    public static function getParentCategory()
+    {
+    	return self::where('parent_id',0)->get();
+    }
 }

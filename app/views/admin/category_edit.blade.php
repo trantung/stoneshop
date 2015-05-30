@@ -20,10 +20,13 @@
 	    	{{Form::label('lblParent',"Select Parent: ", array("class"=>"col-sm-2 control-label"))}}
 	    	<div class="col-sm-10">
 	    		<select class="form-control">
-	    			<option value = 0>....</option>
-	        		<option value = {{$category->parent_id}} selected="true">Thai</option>
-	        		<option>Thai</option>
-	        		<option>Tung</option>
+	        		<option value = {{$category->parent_id}} selected="true">
+	        			@if($category->parent_id !=0)
+	        				{{$category->name}}
+	        			@else
+	        				...
+	        			@endif
+	        		</option>
 	      		</select>
 	    	</div>
 	    </div>

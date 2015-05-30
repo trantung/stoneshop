@@ -20,6 +20,8 @@ class CreateBlogsTable extends Migration {
 			      ->onDelete('cascade');
 			$table->integer('parent_id');
 			$table->string('name',256);
+			$table->softDeletes();
+
 			$table->timestamps();
 		});
 	}

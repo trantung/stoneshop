@@ -25,18 +25,16 @@
 	    <div class="form-group">
 	        {{Form::label('lblPrice',"Price", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-	        	{{Form::number('price',0, array('class'=>'form-control',"rows"=>6))}}
+	        	{{Form::number('price',"", array('class'=>'form-control',"rows"=>6))}}
 	        </div>
 	    </div>
 	    <div class="form-group">
 	    	{{Form::label('lblParent',"Select Category: ", array("class"=>"col-sm-2 control-label"))}}
 	    	<div class="col-sm-10">
 	    		<select name="category" class="form-control">
-	    			<option value="1" selected="true">....</option>
-	        		<option value="1">cate 1</option>
-	        		<option value="2">cate 2</option>
-	        		<option value="3">cate 3</option>
-	        		<option value="4">cate 4</option>
+	    			@foreach($categories as $category)
+	    				<option value = {{$category->id}}>{{$category->name}}</option>
+	    			@endforeach
 	      		</select>
 	    	</div>
 	    </div>

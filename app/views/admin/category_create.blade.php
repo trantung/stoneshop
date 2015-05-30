@@ -20,10 +20,9 @@
 	    	<div class="col-sm-10">
 	    		<select name="parent_id" class="form-control">
 	    			<option value="0" selected="true">....</option>
-	        		<option value="1">Tung</option>
-	        		<option value="2">Thai</option>
-	        		<option value="3">Thai</option>
-	        		<option value="4">Tung</option>
+	    			@foreach($parents as $parent)
+	    			<option value = {{$parent->id}}>{{$parent->name}}</option>
+	    			@endforeach
 	      		</select>
 	    	</div>
 	    </div>

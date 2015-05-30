@@ -35,7 +35,6 @@
 	    	{{Form::label('lblParent',"Select Category: ", array("class"=>"col-sm-2 control-label"))}}
 	    	<div class="col-sm-10">
 	    		<select name="category" class="form-control">
-	    			<option value="1" selected="true">....</option>
 	        		@foreach($categories as $category)
 						<option value="{{$category->id}}" 
 						@if($category->id == $product->category_id)

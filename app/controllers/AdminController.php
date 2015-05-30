@@ -72,18 +72,15 @@ class AdminController extends BaseController {
     public function postCategoryEdit($cat_id){
         $data = Input::except("_token");
         $category = $this->category->findOrFail($cat_id);
-
         $category->name         = $data['name'];
         $category->description  = $data['description'];
-
         $category->push();
-
         return Redirect::back()->with('message',' Lưu Thành Công !');
-
     }
 
     public function getCategoryCreate(){
-        return View::make('admin.category_create');
+        $parents = Category::getParentCategory();
+        return View::make('admin.category_create')->with(compact('parents'));
     }
 
 
@@ -92,7 +89,7 @@ class AdminController extends BaseController {
         $data["shop_id"] = 1;
         $category = $this->category;
         $category->firstOrCreate($data);
-         return Redirect::back()->with('message',' Đã Thêm Thành Công !');
+        return Redirect::back()->with('message',' Đã Thêm Thành Công !');
     }
 
     public function postCategoryDelete($cat_id){
@@ -113,7 +110,8 @@ class AdminController extends BaseController {
     }
 
     public function getProductCreate(){
-        return View::make("admin.product_create");
+        $categories = $this->category->all();
+        return View::make("admin.product_create")->with(compact('categories'));
     }
 
     public function postProductCreate(){
@@ -140,8 +138,8 @@ class AdminController extends BaseController {
     }    
 
     public function getProductEdit($product_id) {
-       $product = $this->product->findOrFail($product_id);
-       $categories = $this->category->all();
+        $product = $this->product->findOrFail($product_id);
+        $categories = $this->category->all();
         return View::make('admin.product_edit')->with('product', $product)
                                                 ->with('categories', $categories);
     }
