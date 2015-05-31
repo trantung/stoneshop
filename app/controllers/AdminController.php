@@ -109,8 +109,8 @@ class AdminController extends BaseController {
         $products = $this->product->paginate(10);
         $categories = $this->category->all();
 
-        return View::make("admin.product")->with('products',$products)
-                                          ->with('categories',$categories);
+        return View::make("admin.product")->with('products',$products);
+                                          // ->with('categories',$categories);
     }
 
     public function getProductCreate(){
@@ -144,6 +144,9 @@ class AdminController extends BaseController {
     public function getProductEdit($product_id) {
         $product = $this->product->findOrFail($product_id);
         $categories = $this->category->all();
+        // $products = Product::find($product_id);
+        // $category_detail = $products->category->name;
+        // dd($category_detail);
         return View::make('admin.product_edit')->with('product', $product)
                                                 ->with('categories', $categories);
     }

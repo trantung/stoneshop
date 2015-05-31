@@ -26,7 +26,7 @@
 				  	<?php 
 				  		dd($product->category);
 				  	?>
-				  		{{-- Category:&nbsp;<a rel="tag" href="#">{{$product->categories->name}}</a> --}}
+				  		Category:&nbsp;<a rel="tag" href="#">{{$product->category->name}}</a>
 				  	</span>
 				 </div>	
 			</div>

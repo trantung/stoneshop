@@ -26,6 +26,7 @@ class CreateShopsTable extends Migration {
 			$table->string('image_url',256);
 			$table->string('lat',256);
 			$table->string('long',256);
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}
