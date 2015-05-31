@@ -34,14 +34,15 @@ class HomeController extends BaseController {
 	}
 
 	public function showDetail($product_id){
-
 		$product = $this->product->findOrFail($product_id);
-		$categories = $this->category->all();
-		dd($categories);
-		dd($product->category_id);
-		$category = $this->category->find($product->category_id);
-		dd($category);
-		return View::make('frontend.detail')->with('product', $product);
+		$productRelate = $this->product->where('category_id', $product->category_id)
+										->where('id', '!=', $product_id)	
+										->paginate(4);
+		return View::make('frontend.detail')->with('product', $product)->with('product_relates', $productRelate);
+	}
+
+	public function getBlog(){
+		return View::make('frontend.blog');
 	}
 
 }

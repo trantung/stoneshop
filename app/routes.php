@@ -12,6 +12,7 @@
 */
 Route::get("/", array('as'=>'frontend.index', 'uses'=>'HomeController@showIndex'));
 Route::get("/detai/{id}", array('as'=>'frontend.detail', 'uses'=>'HomeController@showDetail'));
+Route::get("/blog", array('as'=>'frontend.blog', 'uses'=>'HomeController@getBlog'));
 Route::group(array('prefix' => 'admin'), function () {
     /*
     Login: login for admin

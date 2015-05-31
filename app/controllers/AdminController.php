@@ -107,10 +107,7 @@ class AdminController extends BaseController {
 
     public function getProduct(){
         $products = $this->product->paginate(10);
-        $categories = $this->category->all();
-
         return View::make("admin.product")->with('products',$products);
-                                          // ->with('categories',$categories);
     }
 
     public function getProductCreate(){
@@ -120,12 +117,11 @@ class AdminController extends BaseController {
 
     public function postProductCreate(){
         $data = Input::except('_token');
-        $destinationPath = public_path().'\img';
+        $destinationPath = public_path().'\img\\';
         $filename = 'nothumnail';
-        if(!is_null($data['image'] )){
-            $file = $data['image'];
-            $time = date("Y-m-d H:i:s");
-            $filename        =  $time . '_' . $file->getClientOriginalName();
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $filename        =$file->getClientOriginalName();
             $uploadSuccess   =  $file->move($destinationPath, $filename);
             
         }
@@ -154,16 +150,15 @@ class AdminController extends BaseController {
     public function postProductEdit($product_id){
         $product = $this->product->findOrFail($product_id);
         $data = Input::except('_token');
-        $destinationPath = public_path().'\img';
+        $destinationPath = public_path().'\img\\';
 
         $product->name          = $data['name'];
         $product->description   = $data['description'];
         $product->price         = $data['price'];
         $product->category_id   = $data['category'];
-        if(!is_null($data['image'] )){
-            $file = $data['image'];
-            $time = date("Y-m-d H:i:s");
-            $filename        =  $time . '_' . $file->getClientOriginalName();
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $filename        =  $file->getClientOriginalName();
             $uploadSuccess   =  $file->move($destinationPath, $filename);
             $product->image_url = $filename;
             
@@ -193,10 +188,9 @@ class AdminController extends BaseController {
         $data = Input::except('_token');
         $destinationPath = public_path().'\img';
         $filename = 'nothumnail.jpg';
-        if(!is_null($data['image'] )){
-            $file = $data['image'];
-            $time = date("Y-m-d H:i:s");
-            $filename        =  $time . '_' . $file->getClientOriginalName();
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $filename        =  $file->getClientOriginalName();
             $uploadSuccess   =  $file->move($destinationPath, $filename);
             
         }
@@ -239,10 +233,9 @@ class AdminController extends BaseController {
         $shop->address      = $data['lat'];
         $shop->address      = $data['long'];
 
-        if(!is_null($data['image'] )){
-            $file = $data['image'];
-            $time = date("Y-m-d H:i:s");
-            $filename        =  $time . '_' . $file->getClientOriginalName();
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $filename        =  $file->getClientOriginalName();
             $uploadSuccess   =  $file->move($destinationPath, $filename);
             $shop->image_url = $filename;
             
