@@ -12,8 +12,8 @@
 	  	<div class="col-xs-6 col-md-4">
 	  			<select class="form-control">
 				<option selected="true">....</option>
-				@foreach($categories as $category)
-					<option value="{{$category->id}}">{{$category->name}}</option>
+				@foreach($products as $product)
+					<option value="{{$product->category->id}}">{{$product->category->name}}</option>
 				@endforeach
 			</select>
 	  	</div>
@@ -38,8 +38,7 @@
 	    	<tr>
 	        <td>{{$product->name}}</td>
 	        <td>{{$product->price}}</td>
-	        {{-- <td>{{Category::find($product->category_id)->name}}</td> --}}
-
+	        <td>{{$product->category->name}}</td>
 	        <td>{{$product->description}}</td>
 	        <td>{{$product->average_rate . '/5'}}</td>
 	        <td>
