@@ -3,8 +3,7 @@ var myZoom = 15;
 var myMarkerIsDraggable = true;
 var myCoordsLenght = 6;
 //bang kok
-var defaultLat = (document.getElementById('latitude').value!=0) ? document.getElementById('latitude').value : 21.00296184;
-var defaultLng = (document.getElementById('longitude').value!=0) ? document.getElementById('longitude').value : 105.85202157;
+
 
 // creates the map
 // zooms
@@ -24,7 +23,7 @@ var inforwindow = new google.maps.InfoWindow({
 var myMarker = new google.maps.Marker({
 	position: new google.maps.LatLng(defaultLat, defaultLng),
 	draggable: myMarkerIsDraggable,
-    title:"Drag me!"
+    title:"Drag me!sdfasdfasdfasdfasdfafa"
 });
 
 inforwindow.open(map,myMarker);

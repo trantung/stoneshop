@@ -1,25 +1,28 @@
 @extends('layouts.admin.header')
 
 @section('content')
-<?php 
-	$defaultLat = 21.005446;
-	$defaultLng = 105.843310;
-?>
+
 <div class="form-comment" style="margin-right:10%">
-	{{Form::open(array("route"=>array('shop.post.create'),"class"=>"form-horizontal",'files'=>true))}}
+	{{Form::open(array("route"=>array('shop.post.edit'),"class"=>"form-horizontal",'files'=>true))}}
 	    <div class="form-group">
 	        {{Form::label('lblName',"Name", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-	        	{{Form::text('name',"", array('class'=>'form-control'))}}
+	        	{{Form::text('name',$shop->name, array('class'=>'form-control'))}}
 	        </div>
 	    </div>
 	    <div class="form-group">
     		{{Form::label('lbluName',"User Name", array("class"=>"col-sm-2 control-label"))}}
     		<div class="col-sm-10">
-	  			<select class="form-control selectpicker" name="user_name_id">
+	  			<select class="form-control selectpicker">
 					<option selected="true">....</option>
 					@foreach($users as $user)
-						<option value="{{$user->id}}">{{$user->first_name,'&nbsp', $user->last_name}}</option>
+						<option value="{{$user->id}}"
+						<?php
+							if($shop->user_id == $user->id){
+								echo"&nbsp;selected='true'";
+							}
+						?>
+						>{{$user->first_name,'&nbsp', $user->last_name}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -27,25 +30,25 @@
 	     <div class="form-group">
 	        	{{Form::label('lblDescript',"Description", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-	        	{{Form::textarea('description',"", array('class'=>'form-control',"rows"=>6))}}
+	        	{{Form::textarea('description',$shop->description, array('class'=>'form-control',"rows"=>6))}}
 	        </div>
 	    </div>
 	    <div class="form-group">
 	        	{{Form::label('lblAddress',"Address", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-	        	{{Form::text('address',"", array('class'=>'form-control'))}}
+	        	{{Form::text('address',$shop->address, array('class'=>'form-control'))}}
 	        </div>
 	    </div>
 	    <div class="form-group">
 	        	{{Form::label('lblTel',"Tel", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-	        	{{Form::text('tel',"", array('class'=>'form-control'))}}
+	        	{{Form::text('tel',$shop->tel, array('class'=>'form-control'))}}
 	        </div>
 	    </div>
 	    <div class="form-group">
 	        	{{Form::label('lblMobile',"Mobile", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-	        	{{Form::text('mobile',"", array('class'=>'form-control'))}}
+	        	{{Form::text('mobile',$shop->mobile, array('class'=>'form-control'))}}
 	        </div>
 	    </div>
 	    
@@ -53,17 +56,17 @@
 	        {{Form::label('lbImage',"Image", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
 	        	{{Form::file('image_url',"", array('class'=>'form-control','id'=>'imgInp'))}}
-	        	<img src="{{asset('img/nothumnail.jpg')}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="blah">
+	        	<img src="{{asset('img'), '/', $shop->image_url}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="blah">
 	        </div>
 	    </div>
 	    <div class="form-group">
 			{{ Form::label('lblLast', 'Lat', array('class'=>'col-md-2 control-label')) }}
 			<div class="col-sm-3">
-			    {{ Form::text('lat',$defaultLat, array('class'=>'form-control','id'=>'latitude')) }}
+			    {{ Form::text('lat',$shop->lat, array('class'=>'form-control','id'=>'latitude')) }}
 			</div>
 		    {{ Form::label('lblLong', 'Long', array('class'=>'col-md-2 control-label')) }}
 		    <div class="col-sm-3">
-		        {{ Form::text('long',$defaultLng, array('class'=>'form-control','id'=>'longitude')) }}
+		        {{ Form::text('long',$shop->long, array('class'=>'form-control','id'=>'longitude')) }}
 		    </div>
 		</div>
 		<div class = "form-group">

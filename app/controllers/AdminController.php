@@ -187,12 +187,42 @@ class AdminController extends BaseController {
     }
 
     public function postShopCreate(){
+        $data = Input::except('_token');
+        $destinationPath = public_path().'/img/';
+        $filename = 'nothumnail.jpg';
+        if(!is_null($data['image_url'] )){
+            $file = $data['image_url'];
+            $time = date("Y-m-d H:i:s");
+            $filename        =  $time . '_' . $file->getClientOriginalName();
+            $uploadSuccess   =  $file->move($destinationPath, $filename);
+            
+        }
+        $shop = Shop::create([
+                        'user_id'       => $data['user_name_id'],
+                        'name'          => $data['name'],
+                        'description'   => $data['description'],
+                        'address'       => $data['address'],
+                        'tel'           => $data['address'],
+                        'mobile'        => $data['mobile'],
+                        'lat'           => $data['lat'],
+                        'long'          => $data['long'],
+                        'image_url'     => $filename]
+                );
+        
+        if ($shop) {
+            return Redirect::route('shop.get.edit', $shop->id)->with('message', 'Thêm Thành Công!');
+        }
+        
 
         // return Redirect::back()->with('message',' Đã Thêm Thành Công !');
     }
-
+    public function getShopEdit($shop_id) {
+        $shop = $this->shop->findOrFail($shop_id);
+        $users = $this->user->all();
+        return View::make('admin.shop_edit')->with('shop', $shop)->with('users', $users);
+    }
     public function postShopDelete($shop_id){
-        // $this->shop->destroy($shop_id);
-        // return Redirect::back()->with('message', 'Xoá Thành Công!');
+        $this->shop->destroy($shop_id);
+        return Redirect::back()->with('message', 'Xoá Thành Công!');
     }
 }
