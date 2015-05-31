@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="form-comment" style="margin-right:10%">
-	{{Form::open(array("route"=>array('shop.post.edit'),"class"=>"form-horizontal",'files'=>true))}}
+	{{Form::open(array("route"=>array('shop.post.edit', $shop->id),"class"=>"form-horizontal",'files'=>true))}}
 	    <div class="form-group">
 	        {{Form::label('lblName',"Name", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
@@ -13,7 +13,7 @@
 	    <div class="form-group">
     		{{Form::label('lbluName',"User Name", array("class"=>"col-sm-2 control-label"))}}
     		<div class="col-sm-10">
-	  			<select class="form-control selectpicker">
+	  			<select class="form-control selectpicker" name="user_id">
 					<option selected="true">....</option>
 					@foreach($users as $user)
 						<option value="{{$user->id}}"
@@ -54,9 +54,15 @@
 	    
 	    <div class="form-group">
 	        {{Form::label('lbImage',"Image", array("class"=>"col-sm-2 control-label"))}}
+	        <?php 
+	        	$image = $shop->image_url;
+	        	if($shop->image_url == null){
+	        		$image = 'nothumnail.jpg';
+	        	}
+	        ?>
 	        <div class="col-sm-10">
-	        	{{Form::file('image_url',"", array('class'=>'form-control','id'=>'imgInp'))}}
-	        	<img src="{{asset('img'), '/', $shop->image_url}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="blah">
+	        	{{Form::file('image',"", array('class'=>'form-control','id'=>'imgInp'))}}
+	        	<img src="{{asset('img'), '/', $image}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="blah">
 	        </div>
 	    </div>
 	    <div class="form-group">

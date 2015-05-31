@@ -120,7 +120,7 @@ class AdminController extends BaseController {
 
     public function postProductCreate(){
         $data = Input::except('_token');
-        $destinationPath = public_path().'/img/';
+        $destinationPath = public_path().'\img';
         $filename = 'nothumnail';
         if(!is_null($data['image'] )){
             $file = $data['image'];
@@ -151,12 +151,12 @@ class AdminController extends BaseController {
     public function postProductEdit($product_id){
         $product = $this->product->findOrFail($product_id);
         $data = Input::except('_token');
-        $destinationPath = public_path().'/img/';
+        $destinationPath = public_path().'\img';
 
-        $product->name = $data['name'];
-        $product->description = $data['description'];
-        $product->price = $data['price'];
-        $product->category_id = $data['category'];
+        $product->name          = $data['name'];
+        $product->description   = $data['description'];
+        $product->price         = $data['price'];
+        $product->category_id   = $data['category'];
         if(!is_null($data['image'] )){
             $file = $data['image'];
             $time = date("Y-m-d H:i:s");
@@ -188,21 +188,21 @@ class AdminController extends BaseController {
 
     public function postShopCreate(){
         $data = Input::except('_token');
-        $destinationPath = public_path().'/img/';
+        $destinationPath = public_path().'\img';
         $filename = 'nothumnail.jpg';
-        if(!is_null($data['image_url'] )){
-            $file = $data['image_url'];
+        if(!is_null($data['image'] )){
+            $file = $data['image'];
             $time = date("Y-m-d H:i:s");
             $filename        =  $time . '_' . $file->getClientOriginalName();
             $uploadSuccess   =  $file->move($destinationPath, $filename);
             
         }
         $shop = Shop::create([
-                        'user_id'       => $data['user_name_id'],
+                        'user_id'       => $data['user_id'],
                         'name'          => $data['name'],
                         'description'   => $data['description'],
                         'address'       => $data['address'],
-                        'tel'           => $data['address'],
+                        'tel'           => $data['tel'],
                         'mobile'        => $data['mobile'],
                         'lat'           => $data['lat'],
                         'long'          => $data['long'],
@@ -220,6 +220,35 @@ class AdminController extends BaseController {
         $shop = $this->shop->findOrFail($shop_id);
         $users = $this->user->all();
         return View::make('admin.shop_edit')->with('shop', $shop)->with('users', $users);
+    }
+
+    public function postShopEdit($shop_id){
+        $data = Input::except('_token');
+        $shop = $this->shop->findOrFail($shop_id);
+        $destinationPath = public_path().'\img';
+
+        $shop->name         = $data['name'];
+        $shop->description  = $data['description'];
+        $shop->user_id      = $data['user_id'];
+        $shop->address      = $data['address'];
+        $shop->tel          = $data['tel'];
+        $shop->mobile       = $data['mobile'];
+        $shop->address      = $data['lat'];
+        $shop->address      = $data['long'];
+
+        if(!is_null($data['image'] )){
+            $file = $data['image'];
+            $time = date("Y-m-d H:i:s");
+            $filename        =  $time . '_' . $file->getClientOriginalName();
+            $uploadSuccess   =  $file->move($destinationPath, $filename);
+            $shop->image_url = $filename;
+            
+        }
+        
+        $shop->push();
+        if ($shop) {
+            return Redirect::route('shop.get.edit', $shop->id)->with('message', 'Sửa Thành Công!');
+        }
     }
     public function postShopDelete($shop_id){
         $this->shop->destroy($shop_id);

@@ -36,7 +36,7 @@ class HomeController extends BaseController {
 	public function showDetail($product_id){
 
 		$product = $this->product->findOrFail($product_id);
-		$categories = $this->category->find(1);
+		$categories = $this->category->all();
 		dd($categories);
 		dd($product->category_id);
 		$category = $this->category->find($product->category_id);

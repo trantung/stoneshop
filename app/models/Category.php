@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Category extends Eloquent {
 	use SoftDeletingTrait;
-	protected $fillable = array('name', 'parent_id', 'description','shop_id');
     protected $table = 'categories';
+	protected $fillable = array('name', 'parent_id', 'description','shop_id');
     protected $dates = ['deleted_at'];
 
     public function shops()

@@ -16,7 +16,7 @@
 	    <div class="form-group">
     		{{Form::label('lbluName',"User Name", array("class"=>"col-sm-2 control-label"))}}
     		<div class="col-sm-10">
-	  			<select class="form-control selectpicker" name="user_name_id">
+	  			<select class="form-control selectpicker" name="user_id">
 					<option selected="true">....</option>
 					@foreach($users as $user)
 						<option value="{{$user->id}}">{{$user->first_name,'&nbsp', $user->last_name}}</option>
