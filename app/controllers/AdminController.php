@@ -17,7 +17,7 @@ class AdminController extends BaseController {
     |   Route::get('/', 'HomeController@showWelcome');
     |
     */
-    public function __construct(\Category $category, \Product $product, \Shop $shop,User $user)
+    public function __construct(Category $category, Product $product, Shop $shop,User $user)
     {
         // $this->beforeFilter('admin', array('except'=>array('getLogin','postLogin')));
         $this->category     = $category;

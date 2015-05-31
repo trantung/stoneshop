@@ -9,7 +9,7 @@ class Product extends Eloquent {
     protected $table = 'products';
 	protected $fillable = array('name', 'category_id', 'description','price', 'image_url', 'total_rate', 'quantity_rate', 'average_rate');
 
-    public function categories()
+    public function category()
     {
         return $this->belongsTo('Category', 'category_id');
     }

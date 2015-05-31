@@ -38,7 +38,7 @@
 	    	<tr>
 	        <td>{{$product->name}}</td>
 	        <td>{{$product->price}}</td>
-	        <td>{{Category::find($product->category_id)->name}}</td>
+	        {{-- <td>{{Category::find($product->category_id)->name}}</td> --}}
 
 	        <td>{{$product->description}}</td>
 	        <td>{{$product->average_rate . '/5'}}</td>

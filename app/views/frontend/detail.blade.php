@@ -6,16 +6,11 @@
 		<div class="row">
 			<div class="it-detail">
 				<div class="col-xs-6">
-				    <a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
-						<img src="{{asset('img/images.jpg" alt="castillo')}}" />
-					</a>
+					<img src="{{asset('img'),'/',$product->image_url}}"" alt="{{$product->name}}" />
 				 </div>
 				 <div class="col-xs-6">
-					<a href="http://demo2.woothemes.com/mystile/shop/castillo-cap/">
-						<h3>Stone 1</h3>
-						<span class="price"><span class="amount">$55.00</span></span>
-					</a>
-
+					<h3>{{$product->name}}</h3>
+					<span class="price"><span class="amount">{{$product->price}}</span></span>
 					<div class="rate_widget">
 				        <div class="star_1 ratings_stars"></div>
 				        <div class="star_2 ratings_stars"></div>
@@ -24,19 +19,14 @@
 				        <div class="star_5 ratings_stars"></div>
 				    </div>
 				    <p class="it-info">
-						
-
-	Etiam lobortis dolor eros. Sed sodales imperdiet dapibus. Maecenas faucibus urna sed turpis lacinia consectetur. Mauris at bibendum nibh. Maecenas non lorem nec neque imperdiet mattis ac eu purus. Quisque id tellus ut.
-
-	Ante faucibus interdum eget eu erat. Proin nisl purus, feugiat sit amet luctus in, malesuada sodales risus.
-
+						{{$product->description}}
 					</p>
 				  	<hr />
 				  	<span class="posted_in">
-				  		Category:&nbsp;<a rel="tag" href="#">Hats</a>
-				  	</span>
-				  	<span class="posted_in">
-				  		Tag as:&nbsp;<a rel="tag" href="#">Demo</a>
+				  	<?php 
+				  		dd($product->category);
+				  	?>
+				  		{{-- Category:&nbsp;<a rel="tag" href="#">{{$product->categories->name}}</a> --}}
 				  	</span>
 				 </div>	
 			</div>
