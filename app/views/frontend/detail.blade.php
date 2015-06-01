@@ -19,7 +19,11 @@
 			        <div class="star_5 ratings_stars"></div>
 			    </div>
 			    <p class="it-info">
-					{{$product->description}}
+			    <?php 
+			    	// $pos=strpos($product->description, ' ', 40);
+					// $description = substr($product->description,0,$pos );
+			    ?>
+					{{$product->description}} 			    	
 				</p>
 			  	<hr />
 			  	<span class="posted_in">
@@ -35,14 +39,14 @@
 	    	<li><a data-toggle="tab" href="#reviews">
 	    		<span class="glyphicon glyphicon-thumbs-up">
 	    			
-	    		</span>Reviews(<span class="fb-comments-count" data-href="{{Request::url()}}"></span>)
+	    		</span>Đánh giá(<span class="fb-comments-count" data-href="{{Request::url()}}"></span>)
 
 	    		</a>
 	    		</li>
 	  	</ul>
 	  	<div class="tab-content tab-content-cus">
 		    <div id="description" class="tab-pane fade in active">
-		      	<h2>Product Description</h2>
+		      	<h2>Giới thiệu sản phẩm</h2>
 				<p>
 					{{$product->description}}
 				</p>
@@ -57,7 +61,7 @@
   		</div>
 	</div>
 	<h3>
-		Related Products
+		Sản phẩm liên quan
 	</h3>
 	<div class="row">
 

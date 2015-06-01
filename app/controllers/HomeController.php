@@ -20,16 +20,18 @@ class HomeController extends BaseController {
     protected $user;
 
     public function __construct(Category $category, Product $product, Shop $shop,User $user){
-    	$this->beforeFilter('@title');
+    	$this->beforeFilter('@getTitleAndCategoryName');
         $this->category     = $category;
         $this->product      = $product;
         $this->shop         = $shop;
         $this->user         = $user;
     }
-    public function title()
+    public function getTitleAndCategoryName()
     {
     	$title = $this->shop->first()->description;
+    	$categories = $this->category->where('parent_id',0)->get();
     	View::share('title',$title);
+    	View::share('categories',$categories);
     }
 
 	public function showIndex(){
@@ -42,7 +44,7 @@ class HomeController extends BaseController {
 		$product = $this->product->findOrFail($product_id);
 		$productRelate = $this->product->where('category_id', $product->category_id)
 										->where('id', '!=', $product_id)	
-										->paginate(4);
+										->take(3)->get();
 		return View::make('frontend.detail')->with('product', $product)->with('product_relates', $productRelate);
 	}
 
@@ -50,4 +52,14 @@ class HomeController extends BaseController {
 		return View::make('frontend.blog');
 	}
 
+	public function getCategory($cat_id)
+	{
+		$products = $this->product->where('category_id',$cat_id)->paginate(16);
+		return View::make('frontend.category_detail')->with(compact('products'));
+	}
+
+	public function getAboutUs()
+	{
+		return View::make('frontend.aboutus');
+	}
 }
