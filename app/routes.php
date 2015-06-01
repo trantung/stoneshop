@@ -11,8 +11,15 @@
 |
 */
 Route::get("/", array('as'=>'frontend.index', 'uses'=>'HomeController@showIndex'));
+
 Route::get("/detai/{id}", array('as'=>'frontend.detail', 'uses'=>'HomeController@showDetail'));
+
 Route::get("/blog", array('as'=>'frontend.blog', 'uses'=>'HomeController@getBlog'));
+
+Route::get("/category/{cat_id}", array('as'=>'frontend.category.detail', 'uses'=>'HomeController@getCategory'));
+
+Route::get("/about-us", array('as'=>'frontend.aboutUs', 'uses'=>'HomeController@getAboutUs'));
+
 Route::group(array('prefix' => 'admin'), function () {
     /*
     Login: login for admin

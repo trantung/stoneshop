@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>{{$title}}</title>
 	<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="{{asset('bootstrap-3.3.4-dist/css/bootstrap.min.css')}}">
 
@@ -38,27 +38,25 @@
 		  		<div class="col-xs-6 col-md-5">
 		  			<nav class="navbar row right-menu">
 						<ul class="nav navbar-nav">
-							<li><a href="{{route('frontend.index')}}">Home</a></li>
-							<li><a href="http://demo2.woothemes.com/mystile/shop/" class="glyphicon glyphicon-menu-down">Shop</a>
+							<li><a href="{{route('frontend.index')}}">Trang Chủ</a></li>
+							<li><a href="http://demo2.woothemes.com/mystile/shop/">Categories</a>
 								<ul class="dropdown-menu">
-									<li><a href="{{route('frontend.index')}}">T-Shirts</a></li>
-									<li><a href="{{route('frontend.index')}}">Outerwear</a></li>
-									<li><a href="{{route('frontend.index')}}">Shoes</a></li>
-									<li><a href="{{route('frontend.index')}}">Hats</a></li>
-									<li><a href="{{route('frontend.index')}}">Accessories</a></li>
-									<li><a href="h{{route('frontend.index')}}">Bags</a></li>
+									@foreach($categories as $category)
+										<li><a href="{{route('frontend.category.detail',$category->id)}}">{{$category->name}}</a></li>
+									@endforeach
 								</ul>
 							</li>
-							<li><a href="{{route('frontend.blog')}}">Blog</a></li>
+							<li><a href="{{route('frontend.blog')}}">Bài viết</a></li>
+							<li><a href="{{route('frontend.aboutUs')}}">Liên hệ</a></li>
 						</ul>
 					</nav>
 		  		</div>
 		  		<div class="col-xs-12 col-md-4">
 			      	<form role="search" method="get" class="searchform" action="http://demo2.woothemes.com/mystile/">
 							 <div class="input-group">
-						      <input type="text" class="form-control" placeholder="Search for..." size="20">
+						      <input type="text" class="form-control" placeholder="Tìm kiếm" size="20">
 						      <span class="input-group-btn">
-						        <button class="btn btn-default" type="button">Go!</button>
+						        <button class="btn btn-default" type="button">Tìm kiếm</button>
 						      </span>
 						    </div><!-- /input-group -->
 					</form>
