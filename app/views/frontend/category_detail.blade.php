@@ -33,7 +33,6 @@
             </div>
 		</div><!-- End it-content-->
 		<nav>
-		  {{$products->links()}}
 		</nav>
 	</div>
 	<div class="line"></div>

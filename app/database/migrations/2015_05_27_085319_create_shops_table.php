@@ -21,6 +21,7 @@ class CreateShopsTable extends Migration {
 			$table->string('name',45);
 			$table->string('description',128);
 			$table->string('address',256);
+			$table->string('contact',256);
 			$table->string('tel',45);
 			$table->string('mobile',45);
 			$table->string('image_url',256);

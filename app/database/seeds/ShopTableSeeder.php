@@ -9,6 +9,7 @@ class ShopTableSeeder extends Seeder {
                         'name'=>'Shop bán đá phong thuỷ',
                         'description'=>'Bán đá phong thuỷ, đá quý',
                         'address'=>'Thanh Nhàn, Hà Nội',
+                        'contact'=>'Anh Hùng-Điện thoại:094-999-8587',
                         'tel'=>'094-999-8587',
                         'mobile'=>'094-999-8587',
                         'image_url'=>'',

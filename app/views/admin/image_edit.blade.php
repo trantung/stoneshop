@@ -4,11 +4,14 @@
 <?php 
 	$type_selected="";
 	$status_selected = "";
+	if($image->type ==1){
+		$type_selected = 'Header';
+	}
 	if($image->type ==2){
-		$type_selected = "Footer";
+		$type_selected = 'Footer';
 	}
 	if($image->type ==3){
-		$type_selected="Logo";
+		$type_selected='Logo';
 	}
 	if($image->status == 2){
 		$status_selected = "None";
@@ -19,12 +22,16 @@
 	    <div class="form-group">
 	        {{Form::label('lblName',"Type", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-		        {{ Form::select('type', [
-				   '1' => 'Header',
-				   '2' => 'Footer',
-				   '3' => 'Logo'],
-				   $type_selected,
-			   [	"class"=>"form-control"]) }}
+	        <select class="form-control" name ="type">
+	        <option value="{{$image->type}}" selected="selected">
+	        	{{$type_selected}}
+	        </option>
+	        @foreach($option as $key=>$value)
+	        	@if($key != $image->type)
+	        		<option value="{{$key}}">{{$value}}</option>
+	        	@endif
+	        @endforeach
+	        </select>
 	        </div>
 	    </div>
 	     <div class="form-group">

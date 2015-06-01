@@ -279,21 +279,23 @@ class AdminController extends BaseController {
                 ]);
         
         if ($image) {
-            return Redirect::route('image.get.edit', $image->id)->with('message', 'Thêm Thành Công!');
+            return Redirect::route('image.index', $image->id)->with('message', 'Thêm Thành Công!');
         }
         return Redirect::back()->with('message',' Thất Bại !');
     }
 
     public function getImageEdit($image_id){
         $image = $this->image->findOrFail($image_id);
-        return View::make('admin.image_edit')->with('image', $image);
+        $option = array('1' => 'Header',
+                       '2' => 'Footer',
+                       '3' => 'Logo');
+        return View::make('admin.image_edit')->with(compact('image','option'));
     }
 
     public function postiImageEdit($image_id){
         $data = Input::except('_token');
         $image = $this->image->findOrFail($image_id);
         $destinationPath = public_path().'/img/headers';
-
         $image->type         = $data['type'];
         $image->description  = $data['description'];
         $image->status      = $data['status'];
@@ -306,7 +308,7 @@ class AdminController extends BaseController {
         }
         $image->push();
         if ($image) {
-            return Redirect::route('image.get.edit', $image_id)->with('message', 'Sửa Thành Công!');
+            return Redirect::route('image.index')->with('message', 'Sửa Thành Công!');
         }
         return Redirect::back()->with('message',' Thất Bại !');
     }

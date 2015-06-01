@@ -9,6 +9,11 @@
     	{{$shop->address}}
 	</div>
 	<div class="form-group">
+    	{{Form::label('shop_contact',"Thông tin liên hệ", array("class"=>"col-sm-2 control-label"))}}
+    	{{$shop->contact}}
+	</div>
+
+	<div class="form-group">
     	{{Form::label('shop_tel',"Tel", array("class"=>"col-sm-2 control-label"))}}
     	{{$shop->tel}}
 	</div>
