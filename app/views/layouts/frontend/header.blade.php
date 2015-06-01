@@ -29,11 +29,9 @@
 		<div> 
 		  	<div class="row line-space">
 		      <div class="col-xs-12 col-md-3">
-			      <hgroup>
-					<h1 class="site-title">
-						<a href="{{route('frontend.index')}}">LOGO</a>
-					</h1>
-					</hgroup>
+					<a href="{{route('frontend.index')}}">
+						<img src="{{asset('img/headers').'/'.$logo}}" alt="Logo">
+					</a>
 				</div>
 		  		<div class="col-xs-6 col-md-5">
 		  			<nav class="navbar row right-menu">

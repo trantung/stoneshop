@@ -62,8 +62,9 @@ class HomeController extends BaseController {
 
 	public function getCategory($cat_id)
 	{
+		$sub_cates = $this->category->where('parent_id', $cat_id);
 		$products = $this->product->where('category_id',$cat_id)->paginate(16);
-		return View::make('frontend.category_detail')->with(compact('products'));
+		return View::make('frontend.category_detail')->with(compact('products'))->with('sub_cates', $sub_cates);
 	}
 
 	public function getAboutUs()
