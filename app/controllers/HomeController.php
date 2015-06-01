@@ -72,4 +72,9 @@ class HomeController extends BaseController {
 		$shop = $this->shop->first();
 		return View::make('frontend.aboutus')->with(compact('shop'));
 	}
+
+	public function getSearch(){
+
+		dd(Input::all());
+	}
 }
