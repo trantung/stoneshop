@@ -68,6 +68,7 @@ class HomeController extends BaseController {
 
 	public function getAboutUs()
 	{
-		return View::make('frontend.aboutus');
+		$shop = $this->shop->first();
+		return View::make('frontend.aboutus')->with(compact('shop'));
 	}
 }
