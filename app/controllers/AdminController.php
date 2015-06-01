@@ -117,7 +117,7 @@ class AdminController extends BaseController {
 
     public function postProductCreate(){
         $data = Input::except('_token');
-        $destinationPath = public_path().'\img\\';
+        $destinationPath = public_path().'/img/products';
         $filename = 'nothumnail';
         if(Input::hasFile('image')){
             $file = Input::file('image');
@@ -133,7 +133,7 @@ class AdminController extends BaseController {
                         'image_url'     => $filename]);
 
         if ($product) {
-            return Redirect::route('product.get.edit', $product->id)->with('message', 'Thêm Thành Công!');
+            return Redirect::route('product.index')->with('message', 'Thêm Thành Công!');
         }
     }    
 
