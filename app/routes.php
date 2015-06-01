@@ -22,6 +22,9 @@ Route::get("/about-us", array('as'=>'frontend.aboutUs', 'uses'=>'HomeController@
 
 Route::get("/search", array('as'=>'frontend.search', 'uses'=>'HomeController@getSearch'));
 
+Route::get("/ratting", array('as'=>'frontend.get.rating', 'uses'=>'HomeController@getRatting'));
+Route::post("/ratting", array('as'=>'frontend.post.rating', 'uses'=>'HomeController@postRatting'));
+
 Route::group(array('prefix' => 'admin'), function () {
     /*
     Login: login for admin

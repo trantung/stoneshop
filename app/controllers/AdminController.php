@@ -6,6 +6,7 @@ class AdminController extends BaseController {
     protected $shop;
     protected $user;
     protected $image;
+    protected $userVisited;
     /*
     |--------------------------------------------------------------------------
     | Default Home Controller
@@ -26,6 +27,11 @@ class AdminController extends BaseController {
         $this->shop         = $shop;
         $this->user         = $user;
         $this->image        =$image;
+
+        if (!Session::has('userVisited')){
+            Session::put('userVisited', $this->countVisited());
+        }
+        
     }
 
     public function getLogin()
@@ -58,7 +64,9 @@ class AdminController extends BaseController {
     public function getIndex()
     {
         $userOnline = $this->countUserOnline();
-        return View::make('admin.dashboard')->with('userOnline', $userOnline);
+        $userVisited = Session::get('userVisited');
+        $sumVote = $this->product->all()->sum('total_rate');
+        return View::make('admin.dashboard')->with('userOnline', $userOnline)->with('userVisited', $userVisited)->with('sumVote', $sumVote);
     }
 
     public function getCategory(){
@@ -105,7 +113,8 @@ class AdminController extends BaseController {
 
     public function getProduct(){
         $products = $this->product->paginate(10);
-        return View::make("admin.product")->with('products',$products);
+        $categories = $this->category->all();
+        return View::make("admin.product")->with('products',$products)->with('categories', $categories);
     }
 
     public function getProductCreate(){

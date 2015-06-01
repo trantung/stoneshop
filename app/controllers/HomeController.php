@@ -19,8 +19,9 @@ class HomeController extends BaseController {
     protected $shop;
     protected $user;
     protected $image;
+    protected $rate;
 
-    public function __construct(Category $category, Product $product, Shop $shop,User $user, Image $image){
+    public function __construct(Category $category, Product $product, Shop $shop,User $user, Image $image, Rate $rate){
         $this->countUserOnline();
     	$this->beforeFilter('@getTitleAndCategoryName');
         $this->category     = $category;
@@ -28,6 +29,10 @@ class HomeController extends BaseController {
         $this->shop         = $shop;
         $this->user         = $user;
         $this->image 		=$image;
+        $this->rate 		=$rate;
+        if (!Session::has('userVisit')){
+            Session::put('userVisit', $this->countVisited());
+        }
     }
     public function getTitleAndCategoryName()
     {
@@ -76,5 +81,27 @@ class HomeController extends BaseController {
 	public function getSearch(){
 
 		dd(Input::all());
+	}
+
+	public function postRatting(){
+
+		$input = Input::all();
+		preg_match('/star_([1-5]{1})/', $input['clicked_on'], $match);
+    	$rate = $match[1];
+    	$product_id = $input ['widget_id'];
+    	$product = $this->product->find($product_id);
+    	$infoRateToDB = array();
+    	if($product->total_rate !=0){
+    		$product->total_rate+=1;
+    		$product->quantity_rate+=$rate;
+    	}
+    	else{
+    		$product->total_rate=1;
+    		$product->quantity_rate=$rate;
+    	}
+    	$product->average_rate = round( $product->quantity_rate / $product->total_rate, 1 );
+    	$product->push();
+    	$dataReturn = round($product->average_rate);
+    	return $dataReturn;
 	}
 }

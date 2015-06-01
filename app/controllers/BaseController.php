@@ -85,4 +85,19 @@ class BaseController extends Controller {
 		return $nruvon;
 
 	}
+
+	protected function countVisited(){
+		$countFile = public_path().'/file/index.log';
+		$CF = fopen ($countFile, "r");
+		$count = fread ($CF, filesize ($countFile));
+		fclose ($CF);
+		$count++; 
+		
+
+		$CF = fopen ($countFile, "w");
+		fwrite ($CF, $count); 
+		fclose ($CF); 
+		return $count;
+	}
+
 }

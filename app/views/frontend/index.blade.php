@@ -1,3 +1,4 @@
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 @extends('layouts.frontend.header')
 @section('content')
 
@@ -14,12 +15,20 @@
 						<h3>{{$product->name}}</h3>
 						<span class="price"><span class="amount">{{'<b>', $product->price, ' VND</b>'}}</span></span>
 					</a>
-					<div id="r1" class="rate_widget">
-				        <div class="star_1 ratings_stars"></div>
-				        <div class="star_2 ratings_stars"></div>
-				        <div class="star_3 ratings_stars"></div>
-				        <div class="star_4 ratings_stars"></div>
-				        <div class="star_5 ratings_stars"></div>
+					<div id="{{$product->id}}" class="rate_widget">
+                        <?php 
+                            for($i = 1; $i<=5; $i++){
+                                $divHtml="<div class='star_".$i." ratings_stars"; 
+                                if($i<=round($product->average_rate)){
+                                    $divHtml.=" ratings_vote'";
+                                }
+                                else{
+                                    $divHtml.="'";
+                                }
+                                $divHtml.="></div>";
+                                echo $divHtml;
+                            }
+                        ?>
 				    </div>
 				</div>
 			@endforeach
@@ -32,24 +41,12 @@
 <script type="text/javascript">
     // This is the first thing we add ------------------------------------------
     $(document).ready(function() {
-        
-        $('.rate_widget').each(function(i) {
-            var widget = this;
-            var out_data = {
-                widget_id : $(widget).attr('id'),
-                fetch: 1
-            };
-            $.post(
-                'ratings.php',
-                out_data,
-                function(INFO) {
-                    $(widget).data( 'fsr', INFO );
-                    set_votes(widget);
-                },
-                'json'
-            );
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         });
-    
+
         $('.ratings_stars').hover(
             // Handles the mouseover
             function() {
@@ -60,40 +57,34 @@
             function() {
                 $(this).prevAll().andSelf().removeClass('ratings_over');
                 // can't use 'this' because it wont contain the updated data
-                set_votes($(this).parent());
+                // set_votes($(this).parent());
             }
         );
-        
-        // This actually records the vote
-        $('.ratings_stars').bind('click', function() {
+
+         $('.ratings_stars').bind('click', function() {
             var star = this;
             var widget = $(this).parent();
-            
             var clicked_data = {
                 clicked_on : $(star).attr('class'),
                 widget_id : $(star).parent().attr('id')
             };
-            $.post(
-                'ratings.php',
-                clicked_data,
-                function(INFO) {
-                    widget.data( 'fsr', INFO );
-                    set_votes(widget);
-                },
-                'json'
-            ); 
+            $.ajax({
+                url: "{{route('frontend.post.rating')}}",
+                type: "POST",
+                data: clicked_data
+            }).done(function(data){
+                widget.data( 'round', data );
+                console.log(widget.data('round'));
+                set_votes(widget);
+            });
         });
+
     });
 
     function set_votes(widget) {
-
-        var avg = $(widget).data('fsr').whole_avg;
-        var votes = $(widget).data('fsr').number_votes;
-        var exact = $(widget).data('fsr').dec_avg;
-        
+        var avg = $(widget).data('round');
         $(widget).find('.star_' + avg).prevAll().andSelf().addClass('ratings_vote');
         $(widget).find('.star_' + avg).nextAll().removeClass('ratings_vote'); 
-        $(widget).find('.total_votes').text( votes + ' votes recorded (' + exact + ' rating)' );
     }
     // END FIRST THING
  </script>
