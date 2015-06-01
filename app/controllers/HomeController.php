@@ -18,19 +18,27 @@ class HomeController extends BaseController {
     protected $product;
     protected $shop;
     protected $user;
+    protected $image;
 
-    public function __construct(Category $category, Product $product, Shop $shop,User $user){
+    public function __construct(Category $category, Product $product, Shop $shop,User $user, Image $image){
     	$this->beforeFilter('@getTitleAndCategoryName');
         $this->category     = $category;
         $this->product      = $product;
         $this->shop         = $shop;
         $this->user         = $user;
+        $this->image 		=$image;
     }
     public function getTitleAndCategoryName()
     {
     	$title = $this->shop->first()->description;
     	$categories = $this->category->where('parent_id',0)->get();
+    	$image_header = $this->image->where('type', 1)->where('status', 1)->first()->image_url;
+    	$image_footer = $this->image->where('type', 2)->where('status', 1)->first()->image_url;
+    	$image_logo = $this->image->where('type', 3)->where('status', 1)->first()->image_url;
     	View::share('title',$title);
+    	View::share('logo',$image_logo);
+    	View::share('header',$image_header);
+    	View::share('footer',$image_footer);
     	View::share('categories',$categories);
     }
 

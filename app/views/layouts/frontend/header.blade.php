@@ -13,14 +13,14 @@
 <script type="text/javascript" src="{{asset('bootstrap-3.3.4-dist/js/jquery.js')}}"></script>
 <script src="{{asset('bootstrap-3.3.4-dist/js/bootstrap.min.js')}}"></script>
  <script src="{{asset('js/jquery-latest.js')}}"></script>
-		<script>(function(d, s, id) {
-			  var js, fjs = d.getElementsByTagName(s)[0];
-			  if (d.getElementById(id)) return;
-			  js = d.createElement(s); js.id = id;
-			  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.3";
-			  fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));
-		</script>
+<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.3";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>
 </head>
 <body>
 <div id="fb-root"></div>
@@ -63,7 +63,7 @@
 				</div>
 			</div>
 			 <div class="row hidden-sm banner ">
-			  	<img src="{{asset('img/banner.jpg')}}" alt="">
+			  	<img src="{{asset('img/headers'),'/'.$header}}" alt="">
 				
 				<div class="description">
 					<h1>
