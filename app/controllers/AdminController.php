@@ -5,6 +5,7 @@ class AdminController extends BaseController {
     protected $product;
     protected $shop;
     protected $user;
+    protected $image;
     /*
     |--------------------------------------------------------------------------
     | Default Home Controller
@@ -17,13 +18,14 @@ class AdminController extends BaseController {
     |   Route::get('/', 'HomeController@showWelcome');
     |
     */
-    public function __construct(Category $category, Product $product, Shop $shop,User $user)
+    public function __construct(Category $category, Product $product, Shop $shop, User $user, Image $image)
     {
         // $this->beforeFilter('admin', array('except'=>array('getLogin','postLogin')));
         $this->category     = $category;
         $this->product      = $product;
         $this->shop         = $shop;
         $this->user         = $user;
+        $this->image        =$image;
     }
 
     public function showWelcome()
@@ -147,7 +149,7 @@ class AdminController extends BaseController {
     public function postProductEdit($product_id){
         $product = $this->product->findOrFail($product_id);
         $data = Input::except('_token');
-        $destinationPath = public_path().'\img\\';
+        $destinationPath = public_path().'/img/products';
 
         $product->name          = $data['name'];
         $product->description   = $data['description'];
@@ -183,13 +185,13 @@ class AdminController extends BaseController {
 
     public function postShopCreate(){
         $data = Input::except('_token');
-        $destinationPath = public_path().'\img';
+        $destinationPath = public_path().'/img/shops';
         $filename = 'nothumnail.jpg';
         if(Input::hasFile('image')){
             $file = Input::file('image');
             $filename        =  $file->getClientOriginalName();
             $uploadSuccess   =  $file->move($destinationPath, $filename);
-            
+
         }
         $shop = Shop::create([
                         'user_id'       => $data['user_id'],
@@ -219,7 +221,7 @@ class AdminController extends BaseController {
     public function postShopEdit($shop_id){
         $data = Input::except('_token');
         $shop = $this->shop->findOrFail($shop_id);
-        $destinationPath = public_path().'\img';
+        $destinationPath = public_path().'/img/shops';
 
         $shop->name         = $data['name'];
         $shop->description  = $data['description'];
@@ -243,8 +245,18 @@ class AdminController extends BaseController {
             return Redirect::route('shop.get.edit', $shop->id)->with('message', 'Sửa Thành Công!');
         }
     }
+
     public function postShopDelete($shop_id){
         $this->shop->destroy($shop_id);
         return Redirect::back()->with('message', 'Xoá Thành Công!');
+    }
+
+    public function getImage(){
+        $images = $this->image->paginate(10);
+        return View::make('admin.image')->with('images', $images);
+    }
+
+    public function getImageCreate(){
+        
     }
 }

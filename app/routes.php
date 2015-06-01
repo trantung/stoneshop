@@ -94,6 +94,9 @@ Route::group(array('prefix' => 'admin'), function () {
     //overview image for header and logo
     Route::get('/image', array('as'=>'image.index','uses'=>'AdminController@getImage'));
 
+    //Create new image
+    Route::get('/image/create', array('as'=>'image.get.create','uses'=>'AdminController@getImageCreate'));
+    Route::post('/image/create', array('as'=>'image.post.create','uses'=>'AdminController@postImageCreate'));
     //edit image for header and logo
     Route::get('/image/{image_id}/edit', array('as'=>'image.get.edit','uses'=>'AdminController@getImageEdit'));
     Route::post('/image/{image_id}/edit', array('as'=>'image.post.edit','uses'=>'AdminController@postiImageEdit'));
