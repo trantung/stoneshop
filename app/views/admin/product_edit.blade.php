@@ -16,7 +16,13 @@
 	        {{Form::label('lbImage',"Image", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
 	        	{{Form::file('image', array('id'=>'imgInp'))}}
-	        	<img src="{{asset('img/products').'/'.$product->image_url}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="blah">
+	        	<?php 
+	        	$image = $product->image_url;
+	        	if($product->image_url == null){
+	        		$image = 'nothumnail.jpg';
+	        	}
+	        ?>
+	        	<img src="{{asset('img/products').'/'.$image}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="blah">
 	        </div>
 	    </div>
 	     <div class="form-group">

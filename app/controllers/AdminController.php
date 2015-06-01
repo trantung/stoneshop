@@ -137,6 +137,7 @@ class AdminController extends BaseController {
         if ($product) {
             return Redirect::route('product.index')->with('message', 'Thêm Thành Công!');
         }
+        return Redirect::back()->with('message',' Thất Bại !');
     }    
 
     public function getProductEdit($product_id) {
@@ -155,6 +156,7 @@ class AdminController extends BaseController {
         $product->description   = $data['description'];
         $product->price         = $data['price'];
         $product->category_id   = $data['category'];
+        $filename = 'nothumnail.jpg';
         if(Input::hasFile('image')){
             $file = Input::file('image');
             $filename        =  $file->getClientOriginalName();
@@ -166,6 +168,7 @@ class AdminController extends BaseController {
         if ($product) {
             return Redirect::route('product.get.edit', $product->id)->with('message', 'Sửa Thành Công!');
         }
+        return Redirect::back()->with('message',' Thất Bại !');
     }
 
     public function postProductDelete($product_id){
@@ -208,9 +211,7 @@ class AdminController extends BaseController {
         if ($shop) {
             return Redirect::route('shop.get.edit', $shop->id)->with('message', 'Thêm Thành Công!');
         }
-        
-
-        // return Redirect::back()->with('message',' Đã Thêm Thành Công !');
+        return Redirect::back()->with('message',' Thất Bại !');
     }
     public function getShopEdit($shop_id) {
         $shop = $this->shop->findOrFail($shop_id);
@@ -229,9 +230,9 @@ class AdminController extends BaseController {
         $shop->address      = $data['address'];
         $shop->tel          = $data['tel'];
         $shop->mobile       = $data['mobile'];
-        $shop->address      = $data['lat'];
-        $shop->address      = $data['long'];
-
+        $shop->lat      = $data['lat'];
+        $shop->long      = $data['long'];
+        $filename = 'nothumnail.jpg';
         if(Input::hasFile('image')){
             $file = Input::file('image');
             $filename        =  $file->getClientOriginalName();
@@ -239,11 +240,11 @@ class AdminController extends BaseController {
             $shop->image_url = $filename;
             
         }
-        
         $shop->push();
         if ($shop) {
             return Redirect::route('shop.get.edit', $shop->id)->with('message', 'Sửa Thành Công!');
         }
+        return Redirect::back()->with('message',' Thất Bại !');
     }
 
     public function postShopDelete($shop_id){
@@ -257,6 +258,61 @@ class AdminController extends BaseController {
     }
 
     public function getImageCreate(){
+        return View::make('admin.image_create');
+    }
+
+    public function postImageCreate(){
+        $data = Input::except('_token');
+        $destinationPath = public_path().'/img/headers';
+        $filename = 'nothumnail.jpg';
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $filename        =  $file->getClientOriginalName();
+            $uploadSuccess   =  $file->move($destinationPath, $filename);
+            
+        }
+        $image = Image::create([
+                        'type'       => $data['type'],
+                        'description'   => $data['description'],
+                        'image_url'       => $filename,
+                        'status'           => $data['status']
+                ]);
         
+        if ($image) {
+            return Redirect::route('image.get.edit', $image->id)->with('message', 'Thêm Thành Công!');
+        }
+        return Redirect::back()->with('message',' Thất Bại !');
+    }
+
+    public function getImageEdit($image_id){
+        $image = $this->image->findOrFail($image_id);
+        return View::make('admin.image_edit')->with('image', $image);
+    }
+
+    public function postiImageEdit($image_id){
+        $data = Input::except('_token');
+        $image = $this->image->findOrFail($image_id);
+        $destinationPath = public_path().'/img/headers';
+
+        $image->type         = $data['type'];
+        $image->description  = $data['description'];
+        $image->status      = $data['status'];
+        $filename = 'nothumnail.jpg';
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $filename        =  $file->getClientOriginalName();
+            $uploadSuccess   =  $file->move($destinationPath, $filename);
+            $image->image_url = $filename;
+        }
+        $image->push();
+        if ($image) {
+            return Redirect::route('image.get.edit', $image_id)->with('message', 'Sửa Thành Công!');
+        }
+        return Redirect::back()->with('message',' Thất Bại !');
+    }
+
+    public function postImageDelete($image_id){
+        $this->image->destroy($image_id);
+        return Redirect::back()->with('message', 'Xoá Thành Công!');
     }
 }
