@@ -30,14 +30,14 @@
 		  	<div class="row line-space">
 		      <div class="col-xs-12 col-md-3">
 					<a href="{{route('frontend.index')}}">
-						<img src="{{asset('img/headers').'/'.$logo}}" alt="Logo">
+						<img src="{{asset('img/headers').'/'.$logo}}" alt="Logo" style="width: 200px;height: 60px;margin-top: 10px; margin-bottom: 10px">
 					</a>
 				</div>
 		  		<div class="col-xs-6 col-md-5">
 		  			<nav class="navbar row right-menu">
 						<ul class="nav navbar-nav">
 							<li><a href="{{route('frontend.index')}}">Trang Chủ</a></li>
-							<li><a href="http://demo2.woothemes.com/mystile/shop/">Categories</a>
+							<li><a href="{{route('frontend.index')}}">Categories</a>
 								<ul class="dropdown-menu">
 									@foreach($categories as $category)
 										<li><a href="{{route('frontend.category.detail',$category->id)}}">{{$category->name}}</a></li>
@@ -60,8 +60,8 @@
 					</form>
 				</div>
 			</div>
-			 <div class="row hidden-sm banner ">
-			  	<img src="{{asset('img/headers'),'/'.$header}}" alt="">
+			 <div class="row hidden-sm banner " >
+			  	<img src="{{asset('img/headers'),'/'.$header}}" alt="" style="height: 250px;margin-top: 15px;margin-bottom: 0px">
 				
 				<div class="description">
 					<h1>
@@ -70,8 +70,8 @@
 					<p>
 						Stone shop!
 					</p>
-				</div>
 			</div><!--Banner-->
+			</div>
 		</div><!-- end Header -->
 		<div class="line-space">&nbsp;</div>
 		@yield('content')
