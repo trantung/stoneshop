@@ -30,7 +30,7 @@
 	        <td>{{$image->status}}</td>
 
 	        <td>
-	        	<img src="{{asset('img').'/'.$image_url}}" class="img-rounded compress" alt="Rounded Image" />
+	        	<img src="{{asset('img/headers').'/'.$image_url}}" class="img-rounded compress" alt="Rounded Image" />
 	        	{{-- <img src="{{asset('img/images1.jpg')}}" class="img-roundedd image" alt="Rounded Image" /> --}}
 	        </td>
 	        <td>

@@ -52,7 +52,7 @@
 	    <div class="form-group">
 	        {{Form::label('lbImage',"Image", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-	        	{{Form::file('image_url',"", array('class'=>'form-control','id'=>'imgInp'))}}
+	        	{{Form::file('image',"", array('class'=>'form-control','id'=>'imgInp'))}}
 	        	<img src="{{asset('img/nothumnail.jpg')}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="blah">
 	        </div>
 	    </div>

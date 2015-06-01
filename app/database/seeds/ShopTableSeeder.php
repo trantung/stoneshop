@@ -12,8 +12,8 @@ class ShopTableSeeder extends Seeder {
                         'tel'=>'094-999-8587',
                         'mobile'=>'094-999-8587',
                         'image_url'=>'',
-                        'lat'=>'20',
-                        'long'=>'30',
+                        'lat'=>'21.00296184',
+                        'long'=>'105.85202157',
                         'created_at'=>$now,
                         'updated_at'=>$now,
 
