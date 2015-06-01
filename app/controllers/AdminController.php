@@ -140,9 +140,6 @@ class AdminController extends BaseController {
     public function getProductEdit($product_id) {
         $product = $this->product->findOrFail($product_id);
         $categories = $this->category->all();
-        // $products = Product::find($product_id);
-        // $category_detail = $products->category->name;
-        // dd($category_detail);
         return View::make('admin.product_edit')->with('product', $product)
                                                 ->with('categories', $categories);
     }

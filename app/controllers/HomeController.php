@@ -20,11 +20,16 @@ class HomeController extends BaseController {
     protected $user;
 
     public function __construct(Category $category, Product $product, Shop $shop,User $user){
-
+    	$this->beforeFilter('@title');
         $this->category     = $category;
         $this->product      = $product;
         $this->shop         = $shop;
         $this->user         = $user;
+    }
+    public function title()
+    {
+    	$title = $this->shop->first()->description;
+    	View::share('title',$title);
     }
 
 	public function showIndex(){
