@@ -28,11 +28,6 @@ class AdminController extends BaseController {
         $this->image        =$image;
     }
 
-    public function showWelcome()
-    {
-        return View::make('hello');
-    }
-
     public function getLogin()
     {
         return View::make('admin.login');
@@ -62,7 +57,8 @@ class AdminController extends BaseController {
 
     public function getIndex()
     {
-        return View::make('admin.dashboard');
+        $userOnline = $this->countUserOnline();
+        return View::make('admin.dashboard')->with('userOnline', $userOnline);
     }
 
     public function getCategory(){

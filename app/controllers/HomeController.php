@@ -21,6 +21,7 @@ class HomeController extends BaseController {
     protected $image;
 
     public function __construct(Category $category, Product $product, Shop $shop,User $user, Image $image){
+        $this->countUserOnline();
     	$this->beforeFilter('@getTitleAndCategoryName');
         $this->category     = $category;
         $this->product      = $product;
@@ -43,7 +44,6 @@ class HomeController extends BaseController {
     }
 
 	public function showIndex(){
-
 		$products = $this->product->paginate(16);
 		return View::make('frontend.index')->with('products', $products);
 	}

@@ -55,7 +55,9 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            thai
                                 <i class="glyphicon glyphicon-user"></i>
+
                                 {{-- {{  dd(Auth::user())}} --}}
                                 {{-- <span>{{ Auth::user()->id }} <i class="caret"></i></span> --}}
                             </a>
