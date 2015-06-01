@@ -50,11 +50,11 @@
 					</nav>
 		  		</div>
 		  		<div class="col-xs-12 col-md-4">
-			      	<form role="search" method="get" class="searchform" action="http://demo2.woothemes.com/mystile/">
+			      	<form role="search" method="get" class="searchform" action="{{route('frontend.search')}}">
 							 <div class="input-group">
-						      <input type="text" class="form-control" placeholder="Tìm kiếm" size="20">
+						      <input name ="query" type="text" class="form-control" placeholder="Tìm kiếm" size="20">
 						      <span class="input-group-btn">
-						        <button class="btn btn-default" type="button">Tìm kiếm</button>
+						        <button class="btn btn-default" type="submit">Tìm kiếm</button>
 						      </span>
 						    </div><!-- /input-group -->
 					</form>

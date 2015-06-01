@@ -20,6 +20,8 @@ Route::get("/category/{cat_id}", array('as'=>'frontend.category.detail', 'uses'=
 
 Route::get("/about-us", array('as'=>'frontend.aboutUs', 'uses'=>'HomeController@getAboutUs'));
 
+Route::get("/search", array('as'=>'frontend.search', 'uses'=>'HomeController@getSearch'));
+
 Route::group(array('prefix' => 'admin'), function () {
     /*
     Login: login for admin
