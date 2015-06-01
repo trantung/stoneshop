@@ -120,7 +120,7 @@ class AdminController extends BaseController {
     public function postProductCreate(){
         $data = Input::except('_token');
         $destinationPath = public_path().'/img/products';
-        $filename = 'nothumnail';
+        $filename = 'nothumnail.jpg';
         if(Input::hasFile('image')){
             $file = Input::file('image');
             $filename        =$file->getClientOriginalName();
