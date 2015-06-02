@@ -126,6 +126,13 @@ Route::group(array('prefix' => 'admin'), function () {
      */
     //change password
     Route::get('/change_password', array('as'=>'get.changepassword', 'uses'=>'AdminController@getChangePassword'));
+    
+    Route::post('/change_password', array('as'=>'post.changepassword', 'uses'=>'AdminController@postChangePassword'));
+    //edit profile
+    Route::get('/profile', array('as'=>'get.editprofile', 'uses'=>'AdminController@getEditProfile'));
+    Route::post('/profile', array('as'=>'post.editprofile', 'uses'=>'AdminController@postEditProfile'));
+
+
     //logout
     Route::get('/logout', array('as'=>'get.logout', 'uses'=>'AdminController@getLogout'));
 

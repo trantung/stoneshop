@@ -55,15 +55,12 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            thai
                                 <i class="glyphicon glyphicon-user"></i>
-
-                                {{-- {{  dd(Auth::user())}} --}}
-                                {{-- <span>{{ Auth::user()->id }} <i class="caret"></i></span> --}}
+                              <span>{{$username}} <i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#" class="btn btn-default btn-flat">{{$title = 'Profile'}}</a>
+                                    <a href="{{ route('get.editprofile') }}" class="btn btn-default btn-flat">{{$title = 'Profile'}}</a>
                                 <li>
                                     <a href="{{ route('get.changepassword') }}" class="btn btn-default btn-flat">{{$title = 'Change Password'}}</a>
                                 </li>
@@ -101,7 +98,7 @@
                             <div class="row">
                                 <div id="page-wrapper">
                                     @if(Session::has('message'))
-                                        <div class="alert alert-success">{{ Session::get('message') }}</div>
+                                        <div class="alert alert-success" style="color:red">{{ Session::get('message') }}</div>
                                     @endif
 
                                     @if($errors->has())

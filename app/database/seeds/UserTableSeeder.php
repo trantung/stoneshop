@@ -7,6 +7,7 @@ class UserTableSeeder extends Seeder {
         User::insert(array(
                         'first_name'=>'tran',
                         'last_name'=>'tung',
+                        'username'=>'admin',
                         'email'=>'trantunghn196@gmail.com',
                         'password'=>Hash::make('123456'),
                         'facebook_id'=>'tran',

@@ -34,7 +34,7 @@
 			@endforeach
 		</div><!-- End it-content-->
 		<nav>
-		  {{$products->links()}}
+		  {{$products->appends(array('product' => $name))->links()}}
 		</nav>
 	</div>
 	<div class="line"></div>
