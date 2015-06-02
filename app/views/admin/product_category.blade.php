@@ -3,20 +3,32 @@
 @section('content')
 <div class="manage-menu">
 	<div class="row">
-		<div class="col-xs-12 col-sm-6 col-md-7.5">
+		<div class="col-xs-3 col-sm-6 col-md-3">
 			{{ link_to_route('product.get.create', $title = 'Create New Product',null, array("class"=>"btn btn-info", "role"=>"button")) }}
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-1.5">
-			<span>Slect category: </span>
-		</div>
-	  	<div class="col-xs-6 col-md-4">
+		<div class="col-xs-3 col-md-2">
+	  		<ul class="nav navbar-nav">
+	        	<li class="dropdown">
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>				
+				  <ul class="dropdown-menu" role="menu">
+	                <li><a href="#">Action</a></li>
+	                <li><a href="#">Another action</a></li>
+	                <li><a href="#">Something else here</a></li>
+	                <li class="divider"></li>
+	                <li><a href="#">Separated link</a></li>
+	              </ul>                
+	            </li>
+	        </ul>
+	  	</div>
+		<div class="col-xs-3 col-sm-6 col-md-5">
+			<span><b>Slect category: </b></span>
 	  	{{Form::open(array("route"=>array('admin.product.get.search'),"class"=>"form-horizontal", 'method'=>"GET"))}}
 	  	<div class="row">
 	  			<div class="col-sm-10">
 				<select class="form-control" name="category">
 					<option selected="true">....</option>
 					@foreach($categories as $category)
-						<option value="{{$category->id}}">{{$category->name}}</option>
+						<option value="{{$category->id}}" <?php if($category->id == $parent_cate) echo " selected='true'"?>>{{$category->name}}</option>
 					@endforeach
 				</select>
 				</div>
@@ -24,9 +36,10 @@
 		        	{{Form::submit('Search',array('class'=>'btn btn-primary'))}}
 		        </div>
 	  	</div>
-			
+	
 		{{Form::close()}}
 	  	</div>
+	  	
 	</div>
 	<table class="table table-hover" style="margin-top: 10px;">
 	    <tr>

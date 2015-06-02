@@ -128,5 +128,7 @@ Route::group(array('prefix' => 'admin'), function () {
     Route::get('/change_password', array('as'=>'get.changepassword', 'uses'=>'AdminController@getChangePassword'));
     //logout
     Route::get('/logout', array('as'=>'get.logout', 'uses'=>'AdminController@getLogout'));
+
+    Route::get('/search', array('as'=>'admin.product.get.search', 'uses'=>'AdminController@getProductByCategory'));
     
 });

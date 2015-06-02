@@ -322,4 +322,20 @@ class AdminController extends BaseController {
         $this->image->destroy($image_id);
         return Redirect::back()->with('message', 'Xoá Thành Công!');
     }
+
+    public function getProductByCategory(){
+
+        $data = Input::all();
+        $products = $this->product->where('category_id', $data['category'])->paginate(10);
+        $category_sub = $this->category->where('parent_id', $data['category']);
+        $categories = $this->category->all();
+
+        return View::make('admin.product_category') ->with('category_sub', $category_sub)
+                                                    ->with('products', $products)
+                                                    ->with('parent_cate', $data['category'])
+                                                    ->with('categories', $categories);
+
+        dd(Input::all());
+
+    }
 }
