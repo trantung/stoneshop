@@ -15,7 +15,7 @@
 						<h3>{{$product->name}}</h3>
 						<span class="price"><span class="amount">{{'<b>', $product->price, ' VND</b>'}}</span></span>
 					</a>
-					<div id="{{$product->id}}" class="rate_widget">
+					<div id="{{$product->id}}" class="rate_widget" rated="{{$product->average_rate}}">
                         <?php 
                             for($i = 1; $i<=5; $i++){
                                 $divHtml="<div class='star_".$i." ratings_stars"; 
@@ -49,6 +49,7 @@
 
         $('.ratings_stars').hover(
             // Handles the mouseover
+            // var widget = $(this).parent();
             function() {
                 $(this).prevAll().andSelf().addClass('ratings_over');
                 $(this).nextAll().removeClass('ratings_vote'); 
@@ -56,8 +57,8 @@
             // Handles the mouseout
             function() {
                 $(this).prevAll().andSelf().removeClass('ratings_over');
-                // can't use 'this' because it wont contain the updated data
-                // set_votes($(this).parent());
+                var rated = $(this).parent().attr('rated');
+                set_votes($(this).parent().data('round', rated));
             }
         );
 
@@ -74,7 +75,6 @@
                 data: clicked_data
             }).done(function(data){
                 widget.data( 'round', data );
-                console.log(widget.data('round'));
                 set_votes(widget);
             });
         });
