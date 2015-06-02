@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration {
 			$table->string('description',256);
 			$table->integer('total_rate');
 			$table->integer('quantity_rate');
-			$table->integer('average_rate');
+			$table->double('average_rate');
 			$table->softDeletes(); // <-- This will add a deleted_at field
 			$table->timestamps();
 		});
