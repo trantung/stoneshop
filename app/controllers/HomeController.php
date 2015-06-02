@@ -78,9 +78,13 @@ class HomeController extends BaseController {
 		return View::make('frontend.aboutus')->with(compact('shop'));
 	}
 
-	public function getSearch(){
-
-		dd(Input::all());
+	public function getSearch()
+    {
+        $input = Input::all();
+        $name = strtolower($this->convert_vi_to_en($input['product']));
+        $keyword = array( '%'.$name.'%' );
+        $products = $this->product->whereRaw( 'LOWER(name) like ?', $keyword)->paginate(16);
+        return View::make('frontend.index')->with('products', $products);
 	}
 
 	public function postRatting(){

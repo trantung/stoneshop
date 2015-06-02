@@ -100,4 +100,79 @@ class BaseController extends Controller {
 		return $count;
 	}
 
+	public function convert_vi_to_en($str) {
+        $str = preg_replace("/(À)/", 'à', $str);
+        $str = preg_replace("/(Á)/", 'á', $str);
+        $str = preg_replace("/(Ạ)/", 'ạ', $str);
+        $str = preg_replace("/(Ả)/", 'ả', $str);
+        $str = preg_replace("/(Ã)/", 'ã', $str);
+        $str = preg_replace("/(A)/", 'a', $str);
+
+        $str = preg_replace("/(Â)/", 'â', $str);
+        $str = preg_replace("/(Ấ)/", 'ấ', $str);
+        $str = preg_replace("/(Ẩ)/", 'ẩ', $str);
+        $str = preg_replace("/(Ẫ)/", 'ẫ', $str);
+        $str = preg_replace("/(Ậ)/", 'ậ', $str);
+        $str = preg_replace("/(Ầ)/", 'ầ', $str);
+
+
+        $str = preg_replace("/(Đ)/", 'đ', $str);
+
+        $str = preg_replace("/(Ô)/", 'ô', $str);
+        $str = preg_replace("/(Ố)/", 'ố', $str);
+        $str = preg_replace("/(Ổ)/", 'ổ', $str);
+        $str = preg_replace("/(Ỗ)/", 'ỗ', $str);
+        $str = preg_replace("/(Ộ)/", 'ộ', $str);
+        $str = preg_replace("/(Ồ)/", 'ồ', $str);
+
+        $str = preg_replace("/(O)/", 'o', $str);
+        $str = preg_replace("/(Ó)/", 'ó', $str);
+        $str = preg_replace("/(Ỏ)/", 'ỏ', $str);
+        $str = preg_replace("/(Õ)/", 'õ', $str);
+        $str = preg_replace("/(Ọ)/", 'ọ', $str);
+        $str = preg_replace("/(Ò)/", 'ò', $str);
+
+        $str = preg_replace("/(E)/", 'e', $str);
+        $str = preg_replace("/(É)/", 'é', $str);
+        $str = preg_replace("/(Ẻ)/", 'ẻ', $str);
+        $str = preg_replace("/(Ẽ)/", 'ẽ', $str);
+        $str = preg_replace("/(Ẹ)/", 'ẹ', $str);
+        $str = preg_replace("/(È)/", 'è', $str);
+
+        $str = preg_replace("/(Ê)/", 'ê', $str);
+        $str = preg_replace("/(Ế)/", 'ế', $str);
+        $str = preg_replace("/(Ể)/", 'ể', $str);
+        $str = preg_replace("/(Ễ)/", 'ễ', $str);
+        $str = preg_replace("/(Ệ)/", 'ệ', $str);
+        $str = preg_replace("/(Ề)/", 'ề', $str);
+
+        $str = preg_replace("/(I)/", 'i', $str);
+        $str = preg_replace("/(Í)/", 'í', $str);
+        $str = preg_replace("/(Ỉ)/", 'ỉ', $str);
+        $str = preg_replace("/(Ĩ)/", 'ĩ', $str);
+        $str = preg_replace("/(Ị)/", 'ị', $str);
+        $str = preg_replace("/(Ì)/", 'ì', $str);
+
+        $str = preg_replace("/(U)/", 'u', $str);
+        $str = preg_replace("/(Ú)/", 'ú', $str);
+        $str = preg_replace("/(Ủ)/", 'ủ', $str);
+        $str = preg_replace("/(Ũ)/", 'ũ', $str);
+        $str = preg_replace("/(Ụ)/", 'ụ', $str);
+        $str = preg_replace("/(Ù)/", 'ù', $str);
+        $str = preg_replace("/(Ư)/", 'ư', $str);
+        $str = preg_replace("/(Ứ)/", 'ứ', $str);
+        $str = preg_replace("/(Ử)/", 'ử', $str);
+        $str = preg_replace("/(Ữ)/", 'ữ', $str);
+        $str = preg_replace("/(Ự)/", 'ự', $str);
+        $str = preg_replace("/(Ừ)/", 'ừ', $str);
+
+        $str = preg_replace("/(Y)/", 'y', $str);
+        $str = preg_replace("/(Ý)/", 'ý', $str);
+        $str = preg_replace("/(Ỷ)/", 'ỷ', $str);
+        $str = preg_replace("/(Ỹ)/", 'ỹ', $str);
+        $str = preg_replace("/(Ỵ)/", 'ỵ', $str);
+        $str = preg_replace("/(Ỳ)/", 'ỳ', $str);
+        return $str;
+    }
+
 }
