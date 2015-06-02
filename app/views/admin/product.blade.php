@@ -7,7 +7,7 @@
 			{{ link_to_route('product.get.create', $title = 'Create New Product',null, array("class"=>"btn btn-info", "role"=>"button")) }}
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-1.5">
-			<span>Slect category: </span>
+			<span>Select category: </span>
 		</div>
 	  	<div class="col-xs-6 col-md-4">
 	  			<select class="form-control">
@@ -63,7 +63,7 @@
 		@endforeach
 	</table>
 	<nav>
-	  {{$products->links()}}
+	  {{$products->appends(array('product' => $name))->links()}}
 	</nav>
 </div>
 <script type="text/javascript">

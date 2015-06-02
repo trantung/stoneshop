@@ -38,9 +38,9 @@ class HomeController extends BaseController {
     {
     	$title = $this->shop->first()->description;
     	$categories = $this->category->where('parent_id',0)->get();
-    	$image_header = $this->image->where('type', 1)->where('status', 1)->first()->image_url;
-    	$image_footer = $this->image->where('type', 2)->where('status', 1)->first()->image_url;
-    	$image_logo = $this->image->where('type', 3)->where('status', 1)->first()->image_url;
+    	$image_header = $this->image->where('type', TYPE_HEADER)->where('status', IMAGE_STATUS)->first()->image_url;
+    	$image_footer = $this->image->where('type', TYPE_FOOTER)->where('status', IMAGE_STATUS)->first()->image_url;
+    	$image_logo = $this->image->where('type', TYPE_LOGO)->where('status', IMAGE_STATUS)->first()->image_url;
     	View::share('title',$title);
     	View::share('logo',$image_logo);
     	View::share('header',$image_header);
@@ -49,15 +49,16 @@ class HomeController extends BaseController {
     }
 
 	public function showIndex(){
-		$products = $this->product->paginate(16);
-		return View::make('frontend.index')->with('products', $products);
+		$products = $this->product->paginate(PAGINATE_FRONTEND);
+        $name = '';
+		return View::make('frontend.index')->with(compact('products','name'));
 	}
 
 	public function showDetail($product_id){
 		$product = $this->product->findOrFail($product_id);
 		$productRelate = $this->product->where('category_id', $product->category_id)
 										->where('id', '!=', $product_id)	
-										->take(3)->get();
+										->take(NUMBER_PRODUCT_RELATE)->get();
 		return View::make('frontend.detail')->with('product', $product)->with('product_relates', $productRelate);
 	}
 
@@ -68,7 +69,7 @@ class HomeController extends BaseController {
 	public function getCategory($cat_id)
 	{
 		$sub_cates = $this->category->where('parent_id', $cat_id);
-		$products = $this->product->where('category_id',$cat_id)->paginate(16);
+		$products = $this->product->where('category_id',$cat_id)->paginate(PAGINATE_CATEGORY);
 		return View::make('frontend.category_detail')->with(compact('products','sub_cates'));
 	}
 
@@ -83,8 +84,8 @@ class HomeController extends BaseController {
         $input = Input::all();
         $name = strtolower($this->convert_vi_to_en($input['product']));
         $keyword = array( '%'.$name.'%' );
-        $products = $this->product->whereRaw( 'LOWER(name) like ?', $keyword)->paginate(16);
-        return View::make('frontend.index')->with('products', $products);
+        $products = $this->product->whereRaw( 'LOWER(name) like ?', $keyword)->paginate(PAGINATE_FRONTEND);
+        return View::make('frontend.index')->with(compact('products','name'));
 	}
 
 	public function postRatting(){

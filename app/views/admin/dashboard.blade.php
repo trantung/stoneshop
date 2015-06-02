@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="manage-menu info-user-td"><br />
-
      <section class="content">
             <div class="row">
             <div class="col-lg-4 col-xs-6">

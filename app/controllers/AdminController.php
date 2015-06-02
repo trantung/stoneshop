@@ -21,7 +21,8 @@ class AdminController extends BaseController {
     */
     public function __construct(Category $category, Product $product, Shop $shop, User $user, Image $image)
     {
-        // $this->beforeFilter('admin', array('except'=>array('getLogin','postLogin')));
+        $this->beforeFilter('admin', array('except'=>array('getLogin','postLogin')));
+        $this->beforeFilter('@getUserNameHeader',array('except'=>array('getLogin','postLogin')));
         $this->category     = $category;
         $this->product      = $product;
         $this->shop         = $shop;
@@ -32,6 +33,14 @@ class AdminController extends BaseController {
             Session::put('userVisited', $this->countVisited());
         }
         
+    }
+
+    public function getUserNameHeader()
+    {
+        $username = Auth::user()->username;
+        $user = Auth::user();
+        View::share('username',$username);
+        View::share('user',$user);
     }
 
     public function getLogin()
@@ -46,13 +55,24 @@ class AdminController extends BaseController {
             return Redirect::route('get.admin.index');
         }
         else{
-            return View::make('admin.login')->withErrors('sai cmnr');
+            return View::make('admin.login')->withErrors('Sai email hoặc password');
         }
     }
 
     public function getChangePassword()
     {
-        return 'change pass';
+        return View::make('admin.changepass');
+    }
+
+    public function postChangePassword()
+    {
+        $input = Input::all();
+        $password = $input['password'];
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+        $user->password = Hash::make($password);
+        $user->save();
+        return Redirect::route('get.admin.index')->with('message','Thay đổi password thành công');
     }
 
     public function getLogout()
@@ -112,9 +132,10 @@ class AdminController extends BaseController {
     }
 
     public function getProduct(){
-        $products = $this->product->paginate(10);
+        $products = $this->product->paginate(PAGINATE_BACKEND);
         $categories = $this->category->all();
-        return View::make("admin.product")->with('products',$products)->with('categories', $categories);
+        $name ='';
+        return View::make("admin.product")->with(compact('products','categories','name'));
     }
 
     public function getProductCreate(){
@@ -321,5 +342,23 @@ class AdminController extends BaseController {
     public function postImageDelete($image_id){
         $this->image->destroy($image_id);
         return Redirect::back()->with('message', 'Xoá Thành Công!');
+    }
+
+    public function getEditProfile()
+    {
+        return View::make('admin.profile');
+    }
+
+    public function postEditProfile()
+    {
+        $input = Input::all();
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+        $user->email = $input['email'];
+        $user->first_name = $input['firstname'];
+        $user->last_name = $input['lastname'];
+        $user->username = $input['username'];
+        $user->save();
+        return Redirect::route('get.admin.index')->with('message', 'Chỉnh sửa thành công');
     }
 }
