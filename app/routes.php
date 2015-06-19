@@ -136,6 +136,8 @@ Route::group(array('prefix' => 'admin'), function () {
     //logout
     Route::get('/logout', array('as'=>'get.logout', 'uses'=>'AdminController@getLogout'));
 
+   
     Route::get('/search', array('as'=>'admin.product.get.search', 'uses'=>'AdminController@getProductByCategory'));
     
+    Route::get('/blog', array('as'=>'blog.index', 'uses'=>'AdminController@getBlogIndex'));
 });

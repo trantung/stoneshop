@@ -86,6 +86,7 @@
                         <li>{{ link_to_route('product.index', $title = 'Manage Product') }}</li>
                         <li>{{ link_to_route('shop.index', $title = 'Manage Shop') }}</li>
                         <li>{{ link_to_route('image.index', $title = 'Manage Image Header') }}</li>
+                        <li>{{ link_to_route('blog.index', $title = 'Manager Blog') }}</li>
                     </ul>
                 </section>
                         <!-- /.sidebar -->
