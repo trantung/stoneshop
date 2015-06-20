@@ -37,16 +37,31 @@
 		  		<div class="col-xs-6 col-md-5">
 		  			<nav class="navbar row right-menu">
 						<ul class="nav navbar-nav">
-							<li><a href="{{route('frontend.index')}}">Trang Chủ</a></li>
-							<li><a href="{{route('frontend.index')}}">Categories</a>
-								<ul class="dropdown-menu">
-									@foreach($categories as $category)
-										<li><a href="{{route('frontend.category.detail',$category->id)}}">{{$category->name}}</a></li>
-									@endforeach
-								</ul>
-							</li>
-							<li><a href="{{route('frontend.blog')}}">Bài viết</a></li>
+						  <li><a href="{{route('frontend.index')}}">Trang Chủ</a></li>
+						  <li class="dropdown" id="menu1">
+						    <a class="dropdown-toggle" data-toggle="dropdown" href="{{route('frontend.index')}}">
+						      Categories
+						      <b class="caret"></b>
+						    </a>
+						    <ul class="dropdown-menu">
+						      <li><a href="#">Category 1</a></li>
+						      <li><a href="#">Category 2</a></li>
+						      <li><a href="#">Category 3<b class="caret-right"></b></a>
+						      <!-- In sub Category-->
+						        <ul class="dropdown-menu">
+						          <li><a href="#">Category 3.1</a></li>
+						          <li><a href="#">Category 3.2</a></li>
+						          <li><a href="#">Category 3.3</a></li>
+						          <li><a href="#">Category 3.3</a></li>
+						        </ul>
+						       <!-- end Category -->
+						      </li>
+						    </ul>
+						  </li>
+
+						  <li><a href="{{route('frontend.blog')}}">Bài viết</a></li>
 							<li><a href="{{route('frontend.aboutUs')}}">Liên hệ</a></li>
+
 						</ul>
 					</nav>
 		  		</div>

@@ -18,4 +18,9 @@ class Category extends Eloquent {
     {
     	return self::where('parent_id',0)->get();
     }
+
+    public function getSubCategory(){
+        return Category::where('parent_id', $this->id)
+                        ->first();
+    }
 }
