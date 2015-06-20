@@ -187,3 +187,79 @@ strong{
 .required {
     color: #FF0000;
 }
+.post-content{
+    float: left;
+    display: block;
+    overflow: hidden;
+}
+.post-meta{
+    display: block;
+    float: left;
+    width: auto;
+
+}
+.post-meta .day, .post-meta .month, .post-meta .year {
+    background: #fff none repeat scroll 0 0;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 65.4%;
+}
+
+.post-meta .month{
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: #ff4800;
+    border-top: 0.202em solid #dd2600;
+    color: #fff;
+    font-size: .857em;
+    padding: .202em 0;
+}
+.post-meta .day {
+    font-size: 2em;
+    line-height: 1.387;
+    border: 1px solid #e8e4e3;
+    border-width: 0 1px;
+    font-weight: bold;
+}
+
+.post-meta .year {
+    border: 1px solid #e8e4e3;
+    border-top: 0;
+    -webkit-border-bottom-left-radius: 0.327em;
+    -webkit-border-bottom-right-radius: 0.327em;
+    border-bottom-left-radius: 0.327em;
+    border-bottom-right-radius: 0.327em;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    margin-bottom: 1em;
+    font-size: .857em;
+    padding-bottom: .53em;
+    color: #b0a7a4;
+}
+
+.lastest-comment ul{
+    margin: 0;
+    list-style: none;
+    margin-top: 10px;
+}
+.lastest-comment ul li{
+    margin: 0;
+    padding: 5px;
+}
+.lastest-comment ul a{
+    display: block;
+    line-height: 1;
+}
+.thumbnail{
+    margin-top: 10px;
+    width:90%;
+    height:20%;
+    border: 0 !important;
+    border-bottom: 0.327em solid #ff4800;
+}
+.paginate{
+    text-align: center;
+}
