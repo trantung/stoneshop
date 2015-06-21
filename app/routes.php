@@ -140,4 +140,12 @@ Route::group(array('prefix' => 'admin'), function () {
     Route::get('/search', array('as'=>'admin.product.get.search', 'uses'=>'AdminController@getProductByCategory'));
     
     Route::get('/blog', array('as'=>'blog.index', 'uses'=>'AdminController@getBlogIndex'));
+   
+    Route::get('/blog/create', array('as'=>'blog.get.create', 'uses'=>'AdminController@getCreateBlog'));
+    
+    Route::get('/blog/edit/{blog_id}', array('as'=>'blog.get.edit', 'uses'=>'AdminController@getEditBlog'));
+
+    Route::post('/blog/edit/{blog_id}', array('as'=>'blog.post.edit', 'uses'=>'AdminController@postEditBlog'));
+   
+    Route::post('/blog/delete/{blog_id}', array('as'=>'blog.delete', 'uses'=>'AdminController@deleteBlog'));
 });
