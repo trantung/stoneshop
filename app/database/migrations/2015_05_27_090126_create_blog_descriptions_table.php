@@ -19,6 +19,7 @@ class CreateBlogDescriptionsTable extends Migration {
 			      ->references('id')->on('blogs')
 			      ->onDelete('cascade');
 			$table->text('description');
+			$table->text('image_url')->nullable();
 			$table->softDeletes();
 			$table->timestamps();
 		});
