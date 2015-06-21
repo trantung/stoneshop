@@ -37,7 +37,6 @@
 		  {{$products->appends(array('product' => $name))->links()}}
 		</nav>
 	</div>
-	<div class="line"></div>
 <script type="text/javascript">
     // This is the first thing we add ------------------------------------------
     $(document).ready(function() {

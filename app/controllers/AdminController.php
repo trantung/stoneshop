@@ -348,7 +348,6 @@ class AdminController extends BaseController {
     public function getProductByCategory(){
 
         $data = Input::all();
-        dd($data);
         $products = $this->product->where('category_id', $data['category'])->paginate(10);
         $category_sub = $this->category->where('parent_id', $data['category']);
         $categories = $this->category->all();
