@@ -8,6 +8,6 @@ class BlogDescription extends Eloquent {
 
     public function users()
     {
-        return $this->belongsTo('Blog', 'blog_id');
+        return $this->belongsTo('User', 'user_id');
     }
 }

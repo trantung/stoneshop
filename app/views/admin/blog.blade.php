@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="manage-menu">
-{{ link_to_route('Blog.get.create', $title = 'Create New Blog',null, array("class"=>"btn btn-info", "role"=>"button")) }}
+{{ link_to_route('blog.get.create', $title = 'Create New Blog',null, array("class"=>"btn btn-info", "role"=>"button")) }}
 <br />
 <table class="table table-hover" style="margin-top: 10px;">
     <tr>
@@ -11,24 +11,24 @@
         <th>DESCRIPTION</th>
         <th>ACTION</th>
     </tr>
-    @foreach($Blogs as $Blog)
+    @foreach($blogs as $blog)
         <tr>
-            <td id="cat_name_{{$Blog->id}}"> {{$Blog->name}}</td>
-            <td>{{$Blog->parent_id}}</td>
-            <td>{{$Blog->description}}</td>
+            <td id="cat_name_{{$blog->id}}"> {{$blog->name}}</td>
+            <td>{{$blog->parent_id}}</td>
+            <td>{{$blog->description}}</td>
             <td>
                 <div style=" display: table" >
                 <div style = "display: table-cell;  vertical-align: top;">
-                    {{ link_to_route('Blog.get.edit', $title = 'Edit',$Blog->id, array("class"=>"btn btn-warning", "role"=>"button")) }}
+                    {{ link_to_route('blog.get.edit', $title = 'Edit',$blog->id, array("class"=>"btn btn-warning", "role"=>"button")) }}
                 </div>
-                    {{Form::open(array("route"=>array('Blog.delete',$Blog->id),
+                    {{Form::open(array("route"=>array('blog.delete',$blog->id),
                                         "class"=>"form-horizontal","style"=>"display: table-cell",
                                          'id'  => 'formfield',))}}
                         <div class="form-group">
                             <div class="col-sm-10 col-sm-offset-2">
                                 {{Form::button('Xoá',
                                         array('class'=>'btn btn-danger',
-                                                'id'=>$Blog->id,
+                                                'id'=>$blog->id,
                                                 'data-toggle'=>'modal',
                                                 'data-target'=>'#confirm-submit'
                                         ))}}
@@ -49,7 +49,7 @@
                 Xác Nhận
             </div>
             <div class="modal-body">
-                Bạn Muốn Xóa Blog:&nbsp;<strong id="conf_name"></strong>&nbsp;?
+                Bạn Muốn Xóa blog:&nbsp;<strong id="conf_name"></strong>&nbsp;?
             </div>
 
   <div class="modal-footer">

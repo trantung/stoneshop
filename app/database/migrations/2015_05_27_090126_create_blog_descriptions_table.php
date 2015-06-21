@@ -14,11 +14,9 @@ class CreateBlogDescriptionsTable extends Migration {
 	{
 		Schema::create('blog_descriptions', function(Blueprint $table) {
 			$table->increments('id');
-			$table->integer('blog_id')->unsigned();
-			$table->foreign('blog_id')
-			      ->references('id')->on('blogs')
-			      ->onDelete('cascade');
+			$table->integer('user_id');
 			$table->text('description');
+			$table->text('title');
 			$table->text('image_url')->nullable();
 			$table->softDeletes();
 			$table->timestamps();

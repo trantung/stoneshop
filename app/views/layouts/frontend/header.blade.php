@@ -44,9 +44,12 @@
 						      <b class="caret"></b>
 						    </a>
 						    <ul class="dropdown-menu">
+
+						 
 						      <li><a href="#">Category 1</a></li>
 						      <li><a href="#">Category 2</a></li>
-						      <li><a href="#">Category 3<b class="caret-right"></b></a>
+						      <li><a href="#">Category 3
+						      <b class="caret-right"></b></a>
 						      <!-- In sub Category-->
 						        <ul class="dropdown-menu">
 						          <li><a href="#">Category 3.1</a></li>
