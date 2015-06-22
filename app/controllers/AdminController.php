@@ -28,11 +28,9 @@ class AdminController extends BaseController {
         $this->shop         = $shop;
         $this->user         = $user;
         $this->image        =$image;
-
-        if (!Session::has('userVisited')){
-            Session::put('userVisited', $this->countVisited());
-        }
         
+        $userVisited = $this->countVisited(1);
+        Session::put('userVisited', $userVisited);
     }
 
     public function getUserNameHeader()
@@ -52,9 +50,11 @@ class AdminController extends BaseController {
         $input = Input::all();
         $login = Auth::attempt(array('email'=>$input['email'],'password'=>$input['password']));
         if($login){
+
             return Redirect::route('get.admin.index');
         }
         else{
+            
             return View::make('admin.login')->withErrors('Sai email hoặc password');
         }
     }

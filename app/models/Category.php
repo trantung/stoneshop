@@ -20,7 +20,6 @@ class Category extends Eloquent {
     }
 
     public function getSubCategory(){
-        return Category::where('parent_id', $this->id)
-                        ->first();
+        return Category::where('parent_id', $this->id)->get();
     }
 }

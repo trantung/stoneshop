@@ -86,18 +86,19 @@ class BaseController extends Controller {
 
 	}
 
-	protected function countVisited(){
+	protected function countVisited($admin){
 		$countFile = public_path().'/file/index.log';
 		$CF = fopen ($countFile, "r");
 		$count = fread ($CF, filesize ($countFile));
 		fclose ($CF);
-		$count++; 
-		
-
+		if($admin){
+			return $count;
+		}
+		$incre = $count + 1; 
 		$CF = fopen ($countFile, "w");
-		fwrite ($CF, $count); 
+		fwrite ($CF, $incre); 
 		fclose ($CF); 
-		return $count;
+		return $incre;
 	}
 
 	public function convert_vi_to_en($str) {

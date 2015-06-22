@@ -21,14 +21,13 @@
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 </script>
-
 </head>
 <body>
 <div id="fb-root"></div>
 	<div class="container">
 		<!-- Header -->
 		<div> 
-		  	<div class="row line-space">
+		  	<div class="row">
 		      <div class="col-xs-12 col-md-3">
 					<a href="{{route('frontend.index')}}">
 						<img src="{{asset('img/headers').'/'.$logo}}" alt="Logo" style="width: 200px;height: 60px;margin-top: 10px; margin-bottom: 10px">
@@ -45,26 +44,31 @@
 						    </a>
 						    <ul class="dropdown-menu">
 
-						 
-						      <li><a href="#">Category 1</a></li>
-						      <li><a href="#">Category 2</a></li>
-						      <li><a href="#">Category 3
-						      <b class="caret-right"></b></a>
-						      <!-- In sub Category-->
-						        <ul class="dropdown-menu">
-						          <li><a href="#">Category 3.1</a></li>
-						          <li><a href="#">Category 3.2</a></li>
-						          <li><a href="#">Category 3.3</a></li>
-						          <li><a href="#">Category 3.3</a></li>
-						        </ul>
-						       <!-- end Category -->
-						      </li>
-						    </ul>
-						  </li>
-
-						  <li><a href="{{route('frontend.blog')}}">Bài viết</a></li>
-							<li><a href="{{route('frontend.aboutUs')}}">Liên hệ</a></li>
-
+						 	@foreach($categories as $category)
+								<li>
+									<a href="{{route('frontend.category.detail',$category->id)}}">{{$category->name}}
+									@if(!$category->getSubCategory()->isEmpty())
+									<b class="caret-right"></b>
+							      <!-- In sub Category-->
+								        <ul class="dropdown-menu">
+									        @foreach($category->getSubCategory() as $sub_category)
+									          <li>
+												<a href="{{route('frontend.category.detail',$sub_category->id)}}">
+												{{$sub_category->name}}
+												</a>
+											</li>
+									        @endforeach
+								        </ul>
+							       <!-- end Category -->
+							       @else
+							       	{{''}}
+									@endif
+									</a>
+								</li>
+							@endforeach
+							</ul>
+						<li><a href="{{route('frontend.blog')}}">Bài viết</a></li>
+						<li><a href="{{route('frontend.aboutUs')}}">Liên hệ</a></li>
 						</ul>
 					</nav>
 		  		</div>
@@ -79,6 +83,7 @@
 					</form>
 				</div>
 			</div>
+			<div class="line-space">&nbsp;</div>
 			 <div class="row hidden-sm banner " >
 			  	<img src="{{asset('img/headers'),'/'.$header}}" alt="" style="height: 250px;margin-top: 15px;margin-bottom: 0px">
 				

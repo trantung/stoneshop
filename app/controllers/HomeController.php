@@ -31,14 +31,13 @@ class HomeController extends BaseController {
         $this->image 		=$image;
         $this->rate 		=$rate;
         if (!Session::has('userVisit')){
-            Session::put('userVisit', $this->countVisited());
+            Session::put('userVisit', $this->countVisited(''));
         }
     }
     public function getTitleAndCategoryName()
     {
     	$title = $this->shop->first()->description;
     	$categories = $this->category->where('parent_id',0)->get();
-        $sub_categories = $this->category->where('parent_id','!=',0)->get()->toArray();
     	$image_header = $this->image->where('type', TYPE_HEADER)->where('status', IMAGE_STATUS)->first()->image_url;
     	$image_footer = $this->image->where('type', TYPE_FOOTER)->where('status', IMAGE_STATUS)->first()->image_url;
     	$image_logo = $this->image->where('type', TYPE_LOGO)->where('status', IMAGE_STATUS)->first()->image_url;
@@ -47,7 +46,6 @@ class HomeController extends BaseController {
     	View::share('header',$image_header);
     	View::share('footer',$image_footer);
     	View::share('categories',$categories);
-        View::share('sub_categories',$sub_categories);
     }
 
 	public function showIndex(){
