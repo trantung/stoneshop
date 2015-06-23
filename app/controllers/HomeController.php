@@ -20,8 +20,9 @@ class HomeController extends BaseController {
     protected $user;
     protected $image;
     protected $rate;
+    protected $blog;
 
-    public function __construct(Category $category, Product $product, Shop $shop,User $user, Image $image, Rate $rate){
+    public function __construct(BlogDescription $blog, Category $category, Product $product, Shop $shop,User $user, Image $image, Rate $rate){
         $this->countUserOnline();
     	$this->beforeFilter('@getTitleAndCategoryName');
         $this->category     = $category;
@@ -29,6 +30,7 @@ class HomeController extends BaseController {
         $this->shop         = $shop;
         $this->user         = $user;
         $this->image 		=$image;
+        $this->blog          =$blog;
         $this->rate 		=$rate;
         if (!Session::has('userVisit')){
             Session::put('userVisit', $this->countVisited(''));
@@ -63,7 +65,8 @@ class HomeController extends BaseController {
 	}
 
 	public function getBlog(){
-		return View::make('frontend.blog');
+        $blogs = $this->blog->paginate(PAGINATE_FRONTEND);
+		return View::make('frontend.blog')->with(compact('blogs'));
 	}
 
 	public function getCategory($cat_id)
