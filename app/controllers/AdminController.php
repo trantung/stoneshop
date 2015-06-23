@@ -7,6 +7,7 @@ class AdminController extends BaseController {
     protected $user;
     protected $image;
     protected $userVisited;
+    protected $blog;
     /*
     |--------------------------------------------------------------------------
     | Default Home Controller
@@ -19,7 +20,7 @@ class AdminController extends BaseController {
     |   Route::get('/', 'HomeController@showWelcome');
     |
     */
-    public function __construct(Category $category, Product $product, Shop $shop, User $user, Image $image)
+    public function __construct(BlogDescription $blog, Category $category, Product $product, Shop $shop, User $user, Image $image)
     {
         $this->beforeFilter('admin', array('except'=>array('getLogin','postLogin')));
         $this->beforeFilter('@getUserNameHeader',array('except'=>array('getLogin','postLogin')));
@@ -27,8 +28,8 @@ class AdminController extends BaseController {
         $this->product      = $product;
         $this->shop         = $shop;
         $this->user         = $user;
-        $this->image        =$image;
-        
+        $this->image        = $image;
+        $this->blog         = $blog;
         $userVisited = $this->countVisited(1);
         Session::put('userVisited', $userVisited);
     }
@@ -319,7 +320,7 @@ class AdminController extends BaseController {
     }
 
     public function postiImageEdit($image_id){
-        $data = Input::except('_token');
+         $input = Input::all();
         $image = $this->image->findOrFail($image_id);
         $destinationPath = public_path().'/img/headers';
         $image->type         = $data['type'];
@@ -378,7 +379,66 @@ class AdminController extends BaseController {
     }
     public function getBlogIndex()
     {
-        $blogs = Blog::all();
+        $blogs = BlogDescription::all();
        return View::make('admin.blog')->with(compact('blogs'));
+    }
+    public function getCreateBlog(){
+        return View::make('admin.blog_create');
+    }
+
+    public function postCreateBlog(){
+        $data = Input::except('_token');
+        $destinationPath = public_path().'/img/blogs';
+        $filename = 'nothumnail.jpg';
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $filename        =  $file->getClientOriginalName();
+            $uploadSuccess   =  $file->move($destinationPath, $filename);
+
+        }
+         $blog = BlogDescription::create([
+                        'user_id'       => Auth::user()->id,
+                        'title'         => $data['title'],
+                        'description'   => $data['description'],
+                        'image_url'     => $filename]
+                );
+        
+        if ($blog) {
+            return Redirect::route('blog.get.edit', $blog->id)->with('message', 'Thêm Thành Công!');
+        }
+        return Redirect::back()->with('message',' Thất Bại !');
+    }
+
+    public function getEditBlog($blog_id){
+        $blog = $this->blog->findOrFail($blog_id);
+        return View::make('admin.blog_edit')->with('blog', $blog);
+    }
+
+    public function postEditBlog($blog_id){
+        $blog = $this->blog->findOrFail($blog_id);
+        $data = Input::except('_token');
+        $destinationPath = public_path().'/img/blogs';
+
+        $blog->title            = $data['title'];
+        $blog->description      = $data['description'];
+        $blog->image_url        = $data['image_url'];
+        $filename = 'nothumnail.jpg';
+        if(Input::hasFile('image')){
+            $file = Input::file('image');
+            $filename        =  $file->getClientOriginalName();
+            $uploadSuccess   =  $file->move($destinationPath, $filename);
+            $blog->image_url = $filename;
+            
+        }
+        $blog->push();
+        if ($blog) {
+            return Redirect::route('blog.get.edit', $blog->id)->with('message', 'Sửa Thành Công!');
+        }
+        return Redirect::back()->with('message',' Thất Bại !');
+    }
+
+    public function deleteBlog($blog_id){
+        $this->blog->destroy($blog_id);
+        return Redirect::back()->with('message', 'Xoá Thành Công!');
     }
 }   

@@ -142,6 +142,8 @@ Route::group(array('prefix' => 'admin'), function () {
     Route::get('/blog', array('as'=>'blog.index', 'uses'=>'AdminController@getBlogIndex'));
    
     Route::get('/blog/create', array('as'=>'blog.get.create', 'uses'=>'AdminController@getCreateBlog'));
+    Route::post('/blog/create', array('as'=>'blog.post.create', 'uses'=>'AdminController@postCreateBlog'));
+
     
     Route::get('/blog/edit/{blog_id}', array('as'=>'blog.get.edit', 'uses'=>'AdminController@getEditBlog'));
 
