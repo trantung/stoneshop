@@ -20,8 +20,9 @@ class HomeController extends BaseController {
     protected $user;
     protected $image;
     protected $rate;
+    protected $blog;
 
-    public function __construct(Category $category, Product $product, Shop $shop,User $user, Image $image, Rate $rate){
+    public function __construct(BlogDescription $blog, Category $category, Product $product, Shop $shop,User $user, Image $image, Rate $rate){
         $this->countUserOnline();
     	$this->beforeFilter('@getTitleAndCategoryName');
         $this->category     = $category;
@@ -29,6 +30,7 @@ class HomeController extends BaseController {
         $this->shop         = $shop;
         $this->user         = $user;
         $this->image 		=$image;
+        $this->blog          =$blog;
         $this->rate 		=$rate;
         if (!Session::has('userVisit')){
             Session::put('userVisit', $this->countVisited(''));
@@ -38,13 +40,13 @@ class HomeController extends BaseController {
     {
     	$title = $this->shop->first()->description;
     	$categories = $this->category->where('parent_id',0)->get();
-    	$image_header = $this->image->where('type', TYPE_HEADER)->where('status', IMAGE_STATUS)->first()->image_url;
-    	$image_footer = $this->image->where('type', TYPE_FOOTER)->where('status', IMAGE_STATUS)->first()->image_url;
-    	$image_logo = $this->image->where('type', TYPE_LOGO)->where('status', IMAGE_STATUS)->first()->image_url;
-    	View::share('title',$title);
-    	View::share('logo',$image_logo);
-    	View::share('header',$image_header);
-    	View::share('footer',$image_footer);
+        $image_header = $this->image->getCommonImage(TYPE_HEADER);
+        $image_footer = $this->image->getCommonImage(TYPE_FOOTER);
+        $image_logo = $this->image->getCommonImage(TYPE_LOGO);
+        View::share('logo',$image_logo);
+        View::share('header',$image_header);
+        View::share('footer',$image_footer);
+        View::share('title',$title);
     	View::share('categories',$categories);
     }
 
@@ -63,7 +65,8 @@ class HomeController extends BaseController {
 	}
 
 	public function getBlog(){
-		return View::make('frontend.blog');
+        $blogs = $this->blog->paginate(PAGINATE_FRONTEND);
+		return View::make('frontend.blog')->with(compact('blogs'));
 	}
 
 	public function getCategory($cat_id)

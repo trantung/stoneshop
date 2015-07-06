@@ -4,8 +4,10 @@
 	  <div class="col-md-4">
 			<div>
 			  	<a href="#">
-				  		<img src="{{asset('img/headers').'/'.$footer}}" alt="SHOP STONE" title="SHOP STONE"/>
-				  	</a>
+			  		@if(!is_null($footer))
+			  		<img src="{{asset('img/headers').'/'.$footer}}" alt="SHOP STONE" title="SHOP STONE"/>
+			  		@endif
+			  	</a>
 			</div>
 			<div class="fb-like fb-cus" data-href="{{Request::url()}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true">
 			</div>

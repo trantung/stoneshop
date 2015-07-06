@@ -5,72 +5,38 @@
 
 <div class="row">
 	<div class="col-xs-8">
-	<div class="row">
-			<div class="col-xs-4 col-sm-3">
-				<div class="post-meta">
-					<a href="http://demo2.woothemes.com/mystile/author/wooadmin/">
-					<img class="img-circle" height="128" width="128" srcset="http://1.gravatar.com/avatar/4356450f3c00bd71eacd6afd0018549f?s=256&d=mm&r=g 2x" src="http://1.gravatar.com/avatar/4356450f3c00bd71eacd6afd0018549f?s=128&d=mm&r=g" alt="">
-					</a>
-					<span class="month">Oct</span>
-					<span class="day">20</span>
-					<span class="year">2011</span>
+		@foreach($blogs as $blog)
+			<div class="row">
+				<div class="col-xs-4 col-sm-3">
+					<div class="post-meta">
+						<a href="http://demo2.woothemes.com/mystile/author/wooadmin/">
+						<img class="img-circle" height="128" width="128" srcset="{{asset('img/nothumnail.jpg')}}" alt="">
+						</a>
+						<span class="month">{{date('M', strtotime($blog->created_at))}}</span>
+						<span class="day">{{date('d', strtotime($blog->created_at))}}</span>
+						<span class="year">{{date('Y', strtotime($blog->created_at))}}</span>
+					</div>
 				</div>
+				<div class="col-xs-8 col-sm-9">
+				<img src="{{asset('img/blogs/'), '/', $blog->image_url}}" alt="Image in a post"  title="Image in a post" class="thumbnail">
+				<h1>
+					<a href="#" rel="bookmark" title="Sed tincidunt augue et nibh">{{$blog->title}}</a>
+				</h1>
+					<p>
+						{{$blog->description;}}
+					</p>
+					<div class="line-space">&nbsp;</div>
 			</div>
-			<div class="col-xs-8 col-sm-9">
-			<img src="http://farm3.static.flickr.com/2557/4131103966_6e0288719c_b.jpg" alt="Image in a post"  title="Image in a post" class="thumbnail">
-			<h1>
-				<a href="http://demo2.woothemes.com/mystile/2009/11/11/sed-tincidunt-augue-et-nibh/" rel="bookmark" title="Sed tincidunt augue et nibh">Title of Post</a>
-			</h1>
-				<p>
-					The contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe content
-				</p>
-		<div class="line-space">&nbsp;</div>
-		</div>
-	</div>
-	
-		<div class="row">
-			<div class="col-xs-4 col-sm-3">
-				<div class="post-meta">
-					<a href="http://demo2.woothemes.com/mystile/author/wooadmin/">
-					<img class="img-circle" height="128" width="128" srcset="http://1.gravatar.com/avatar/4356450f3c00bd71eacd6afd0018549f?s=256&d=mm&r=g 2x" src="http://1.gravatar.com/avatar/4356450f3c00bd71eacd6afd0018549f?s=128&d=mm&r=g" alt="">
-					</a>
-					<span class="month">Oct</span>
-					<span class="day">20</span>
-					<span class="year">2011</span>
-				</div>
-			</div>
-			<div class="col-xs-8 col-sm-9">
-			<img src="http://farm3.static.flickr.com/2557/4131103966_6e0288719c_b.jpg" alt="Image in a post"  title="Image in a post" class="thumbnail">
-			<h1>
-				<a href="http://demo2.woothemes.com/mystile/2009/11/11/sed-tincidunt-augue-et-nibh/" rel="bookmark" title="Sed tincidunt augue et nibh">Title of Post</a>
-			</h1>
-				<p>
-					The contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe contentThe content
-				</p>
-				<div class="line-space">&nbsp;</div>
-		</div>
+		@endforeach
 	</div>
 	<nav class="paginate">
-		  <ul class="pagination">
-		    <li>
-		      <a href="#" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		    <li><a href="#">1</a></li>
-		    <li><a href="#">2</a></li>
-		    <li><a href="#">3</a></li>
-		    <li><a href="#">4</a></li>
-		    <li><a href="#">5</a></li>
-		    <li>
-		      <a href="#" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
-		  </ul>
+		  <nav>
+		  {{$blogs->appends(array('blog' => $title))->links()}}
+		</nav>
 	</nav>
 	</div>
 	<div class="col-xs-4">
+	<!--
 		<ul class="nav nav-tabs">
 		    <li class="active"><a href="#tab1" data-toggle="tab">Lastest</a></li>
 		    <li><a href="#tab2" data-toggle="tab">Popular</a></li>
@@ -186,6 +152,7 @@
 				</ul>
 		    </div>
   		</div>
+  	-->
 	</div>
 
 </div>

@@ -7,14 +7,12 @@
 <table class="table table-hover" style="margin-top: 10px;">
     <tr>
         <th>NAME</th>
-        <th>PARENT</th>
         <th>DESCRIPTION</th>
         <th>ACTION</th>
     </tr>
     @foreach($blogs as $blog)
         <tr>
-            <td id="cat_name_{{$blog->id}}"> {{$blog->name}}</td>
-            <td>{{$blog->parent_id}}</td>
+            <td id="blog_name{{$blog->id}}"> {{$blog->title}}</td>
             <td>{{$blog->description}}</td>
             <td>
                 <div style=" display: table" >
@@ -60,7 +58,7 @@
 </div>
 <script type="text/javascript">
     $('button').click(function() {
-        var id = '#cat_name_'+this.id;
+        var id = '#blog_name'+this.id;
      $('#conf_name').html($(id).html());
     });
 

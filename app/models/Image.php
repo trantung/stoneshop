@@ -10,4 +10,13 @@ class Image extends Eloquent {
 	protected $fillable = array('type', 'description','image_url', 'status');
     protected $dates = ['deleted_at'];
 
+    public static function getCommonImage($type)
+    {
+    	$images = self::where('type', $type)->where('status', IMAGE_STATUS)->get()->toArray();
+    	if(empty($images)){
+    		return null ;
+    	}
+    	return $images[0]['image_url'];
+    }
+
 }
