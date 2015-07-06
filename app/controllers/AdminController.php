@@ -378,7 +378,7 @@ class AdminController extends BaseController {
     }
     public function getBlogIndex()
     {
-        $blogs = Blog::all();
-       return View::make('admin.blog')->with(compact('blogs'));
+        $blogs = BlogDescription::all();
+        return View::make('admin.blog')->with(compact('blogs'));
     }
 }   
