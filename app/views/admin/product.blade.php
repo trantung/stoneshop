@@ -52,8 +52,8 @@
 	        <td>{{$product->description}}</td>
 	        <td>{{$product->average_rate . '/5'}}</td>
 	        <td>
-	        	<img src="{{asset('img/products').'/'.$image}}" class="img-rounded compress" alt="Rounded Image" />
-	        	{{-- <img src="{{asset('img/images1.jpg')}}" class="img-roundedd image" alt="Rounded Image" /> --}}
+	        	<img src="{{asset('public/img/products').'/'.$image}}" class="img-rounded compress" alt="Rounded Image" />
+	        	{{-- <img src="{{asset('public/img/images1.jpg')}}" class="img-roundedd image" alt="Rounded Image" /> --}}
 	        </td>
 	        <td>
 	            <div style=" display: table" >

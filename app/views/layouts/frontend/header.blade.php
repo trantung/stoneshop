@@ -3,16 +3,16 @@
 <head>
 	<title>{{$title}}</title>
 	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="{{asset('bootstrap-3.3.4-dist/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('public/bootstrap-3.3.4-dist/css/bootstrap.min.css')}}">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="{{asset('bootstrap-3.3.4-dist/css/bootstrap-theme.min.css')}}">
-<link rel="stylesheet" href="{{asset('css/custom.css')}}">
+<link rel="stylesheet" href="{{asset('public/bootstrap-3.3.4-dist/css/bootstrap-theme.min.css')}}">
+<link rel="stylesheet" href="{{asset('public/css/custom.css')}}">
 
 <!-- Latest compiled and minified JavaScript -->
-<script type="text/javascript" src="{{asset('bootstrap-3.3.4-dist/js/jquery.js')}}"></script>
-<script src="{{asset('bootstrap-3.3.4-dist/js/bootstrap.min.js')}}"></script>
- <script src="{{asset('js/jquery-latest.js')}}"></script>
+<script type="text/javascript" src="{{asset('public/bootstrap-3.3.4-dist/js/jquery.js')}}"></script>
+<script src="{{asset('public/bootstrap-3.3.4-dist/js/bootstrap.min.js')}}"></script>
+ <script src="{{asset('public/js/jquery-latest.js')}}"></script>
 <script>(function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];
 	  if (d.getElementById(id)) return;
@@ -31,7 +31,7 @@
 		      <div class="col-xs-12 col-md-3">
 					<a href="{{route('frontend.index')}}">
 						@if(!is_null($logo))
-						<img src="{{asset('img/headers').'/'.$logo}}" alt="Logo" style="width: 200px;height: 60px;margin-top: 10px; margin-bottom: 10px">
+						<img src="{{asset('public/img/headers').'/'.$logo}}" alt="Logo" style="width: 200px;height: 60px;margin-top: 10px; margin-bottom: 10px">
 						@endif
 					</a>
 				</div>
@@ -88,7 +88,7 @@
 			<div class="line-space">&nbsp;</div>
 			 <div class="row hidden-sm banner " >
 				@if(!is_null($header))
-			  	<img src="{{asset('img/headers'),'/'.$header}}" alt="" style="height: 250px;margin-top: 15px;margin-bottom: 0px">
+			  	<img src="{{asset('public/img/headers'),'/'.$header}}" alt="" style="height: 250px;margin-top: 15px;margin-bottom: 0px">
 				<div class="description">
 					<h1>
 						<span>Welcome to our store</span>

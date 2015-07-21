@@ -30,7 +30,7 @@
 	    <div class="form-group">
 	        	{{Form::label('lblDescript',"Description", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-	        	{{Form::textarea('description',$shop->description, array('class'=>'form-control',"rows"=>6))}}
+	        	{{Form::textarea('description',$shop->description, array('class'=>'form-control',"rows"=>6, "id"=>'editor'))}}
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -68,7 +68,7 @@
 	        ?>
 	        <div class="col-sm-10">
 	        	{{Form::file('image',"", array('class'=>'form-control','id'=>'imgInp'))}}
-	        	<img src="{{asset('img/shops'), '/', $image}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="blah">
+	        	<img src="{{asset('public/img/shops'), '/', $image}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="blah">
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -110,5 +110,6 @@ var defaultLng = (document.getElementById('longitude').value!=0) ? document.getE
 		$('[name="image"]').change(function(){
         readURL(this);
     });
+		initSample();
 	</script>
 @stop

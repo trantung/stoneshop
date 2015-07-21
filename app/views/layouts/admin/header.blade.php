@@ -9,23 +9,26 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     @endif
     <!-- bootstrap 3.0.2 -->
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
     {{-- add site css --}}
-    <link href="{{ asset('css/site.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/site.css') }}" rel="stylesheet" type="text/css" />
     <!-- font Awesome -->
-    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
-    <link href="{{ asset('css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="{{ asset('css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('css/customize.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/customize.css') }}" rel="stylesheet" type="text/css" />
     
-    <link rel="stylesheet" href="{{ url('css/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ url('public/css/bootstrap-datepicker.css') }}">
     
-    <link rel="stylesheet" href="{{ url('css/jquery.timepicker.css') }}">
+    <link rel="stylesheet" href="{{ url('public/css/jquery.timepicker.css') }}">
 
-     <script type="text/javascript" src="{{ url('js/jquery.js') }}"></script>
+    <link rel="stylesheet" href="{{ url('public/ckeditor/samples/css/samples.css')}}">
+     <script type="text/javascript" src="{{ url('public/js/jquery.js') }}"></script>
+     <script src="{{ url('public/ckeditor/ckeditor.js')}}"></script>
+    <script src="{{ url('public/ckeditor/samples/js/sample.js')}}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;libraries=places" style=""></script>
 
 
@@ -120,17 +123,17 @@
 
 
                 <!-- jQuery 2.0.2 -->
-                <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('public/js/jquery.min.js') }}" type="text/javascript"></script>
                 <!-- jQuery UI 1.10.3 -->
-                <script src="{{ asset('js/jquery-ui-1.10.3.min.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('public/js/jquery-ui-1.10.3.min.js') }}" type="text/javascript"></script>
                 <!-- Bootstrap -->
-                <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('public/js/bootstrap.min.js') }}" type="text/javascript"></script>
                 <!-- AdminLTE App -->
-                <script src="{{ asset('js/AdminLTE/app.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('public/js/AdminLTE/app.js') }}" type="text/javascript"></script>
 
-                <script src="{{ asset('js/common.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('public/js/common.js') }}" type="text/javascript"></script>
 
-                <script src="{{ asset('js/admin.js') }}" type="text/javascript"></script>
+                <script src="{{ asset('public/js/admin.js') }}" type="text/javascript"></script>
   
                 <script type="text/javascript" src="{{ url('js/jquery.timepicker.js') }}"></script>
   

@@ -22,13 +22,13 @@
 	        		$image = 'nothumnail.jpg';
 	        	}
 	        ?>
-	        	<img src="{{asset('img/products').'/'.$image}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="blah">
+	        	<img src="{{asset('public/img/products').'/'.$image}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" id="blah">
 	        </div>
 	    </div>
 	     <div class="form-group">
 	        	{{Form::label('lblDescript',"Description", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-	        	{{Form::textarea('description',$product->description, array('class'=>'form-control',"rows"=>6))}}
+	        	{{Form::textarea('description',$product->description, array('class'=>'form-control',"rows"=>6, "id"=>'editor'))}}
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -71,5 +71,6 @@
 		$('[name="image"]').change(function(){
         readURL(this);
     });
+		initSample();
 	</script>
 @stop

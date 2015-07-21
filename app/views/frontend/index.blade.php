@@ -11,7 +11,7 @@
 			@foreach($products as $product)
 				<div class="col-xs-12 col-md-3 item">
 				    <a href="{{route('frontend.detail', $product->id)}}">
-						<img src="{{asset('img/products').'/'. $product->image_url}}" alt="{{$product->name}}" />
+						<img src="{{asset('public/img/products').'/'. $product->image_url}}" alt="{{$product->name}}" />
 						<h3>{{$product->name}}</h3>
 						<span class="price"><span class="amount">{{'<b>', $product->price, ' VND</b>'}}</span></span>
 					</a>

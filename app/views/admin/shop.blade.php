@@ -41,7 +41,7 @@
 	        <td>{{$shop->long}}</td>
 	        <td>
 	        	<div>
-	        		<img src="{{asset('img/shops').'/'.$image}}" class="img-rounded compress" alt="Rounded Image" />
+	        		<img src="{{asset('public/img/shops').'/'.$image}}" class="img-rounded compress" alt="Rounded Image" />
 	        		{{-- <img src="{{asset('img/images1.jpg')}}" class="img-roundedd image" alt="Rounded Image" /> --}}
 	        	</div>
 	        </td>

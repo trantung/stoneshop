@@ -12,7 +12,7 @@
 	     <div class="form-group">
 	        {{Form::label('lblName',"Description", array("class"=>"col-sm-2 control-label"))}}
 	        <div class="col-sm-10">
-	        {{Form::textarea('description',"", array('class'=>'form-control',"rows"=>6))}}
+	        {{Form::textarea('description',"", array('class'=>'form-control',"rows"=>6,  "id"=>'editor'))}}
 	        </div>
 	    </div>
 	    <div class="form-group">
@@ -33,5 +33,7 @@
 	    </div>
 	{{Form::close()}}
 </div>
-
+<script type="text/javascript">
+	initSample();
+</script>
 @stop

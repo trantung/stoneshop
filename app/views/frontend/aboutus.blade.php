@@ -19,7 +19,7 @@
 	</div>
 	<div class="form-group">
     	{{Form::label('shop_image',"Sơ đồ đường đi", array("class"=>"col-sm-2 control-label"))}}
-    	<img src="{{asset('img/shops'), '/', $shop->image_url}}" class="img-rounded" alt="Cinque Terre" width="650" height="236" id="blah">
+    	<img src="{{asset('public/img/shops'), '/', $shop->image_url}}" class="img-rounded" alt="Cinque Terre" width="650" height="236" id="blah">
 	</div>
 	<div class="form-group">
     	{{Form::label('shop_googlemap',"Google Map", array("class"=>"col-sm-2 control-label"))}}
@@ -40,7 +40,7 @@
  		var defaultLat = (document.getElementById('latitude').value!=0) ? document.getElementById('latitude').value : 21.00296184;
 		var defaultLng = (document.getElementById('longitude').value!=0) ? document.getElementById('longitude').value : 105.85202157;
 	 </script>
-	 <script type="text/javascript" src="{{ url('js/gmap.js') }}"></script>
+	 <script type="text/javascript" src="{{ url('public/js/gmap.js') }}"></script>
 
 </div>
 @stop

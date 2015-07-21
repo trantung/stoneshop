@@ -390,8 +390,8 @@ class AdminController extends BaseController {
         $data = Input::except('_token');
         $destinationPath = public_path().'/img/blogs';
         $filename = 'nothumnail.jpg';
-        if(Input::hasFile('image')){
-            $file = Input::file('image');
+        if(Input::hasFile('image_url')){
+            $file = Input::file('image_url');
             $filename        =  $file->getClientOriginalName();
             $uploadSuccess   =  $file->move($destinationPath, $filename);
 
@@ -423,8 +423,8 @@ class AdminController extends BaseController {
         $blog->description      = $data['description'];
         $blog->image_url        = $data['image_url'];
         $filename = 'nothumnail.jpg';
-        if(Input::hasFile('image')){
-            $file = Input::file('image');
+        if(Input::hasFile('image_url')){
+            $file = Input::file('image_url');
             $filename        =  $file->getClientOriginalName();
             $uploadSuccess   =  $file->move($destinationPath, $filename);
             $blog->image_url = $filename;
